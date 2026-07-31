@@ -31,6 +31,7 @@ export interface PharmacyItem {
 export interface PharmacyItemStatus extends PharmacyItem {
   status: StockStatus;
   daysUntilExpiry: number;
+  isExpired: boolean;
   isExpiringSoon: boolean;
 }
 
@@ -40,7 +41,10 @@ export interface PharmacyStatusSummary {
   lowCount: number;
   normalCount: number;
   overstockedCount: number;
+
+  expiredCount: number;
   expiringSoonCount: number;
+
   generatedAt: string; // ISO timestamp
 }
 

@@ -38,18 +38,28 @@ export class PharmacyService {
    * expiry flagging, so every future tool (recommendations, alerts, etc.)
    * stays consistent with what get_pharmacy_status reports.
    */
-  private toItemStatus(
+  private toItemStatus( 
     item: PharmacyItem,
     expiringWithinDays: number
   ): PharmacyItemStatus {
-    const status = this.classifyStock(item);
     const daysUntilExpiry = this.daysUntil(item.expiryDate);
+
+    const isExpired = daysUntilExpiry <= 0;
+    const isExpiringSoon =
+      !isExpired && daysUntilExpiry <= expiringWithinDays;
+
+    const status: StockStatus = isExpired
+      ? "critical"
+      : this.classifyStock(item);
+
+
 
     return {
       ...item,
       status,
       daysUntilExpiry,
-      isExpiringSoon: daysUntilExpiry <= expiringWithinDays,
+      isExpired,
+      isExpiringSoon,
     };
   }
 
@@ -84,10 +94,14 @@ export class PharmacyService {
       overstocked: 0,
     };
 
+    let expiredCount = 0;
     let expiringSoonCount = 0;
 
     for (const item of items) {
       counts[item.status] += 1;
+      if (item.isExpired) { 
+        expiredCount += 1;
+      }
       if (item.isExpiringSoon) {
         expiringSoonCount += 1;
       }
@@ -97,8 +111,10 @@ export class PharmacyService {
       totalItems: items.length,
       criticalCount: counts.critical,
       lowCount: counts.low,
-      normalCount: counts.normal,
+      normalCount: counts.normal, 
       overstockedCount: counts.overstocked,
+
+      expiredCount: expiredCount,
       expiringSoonCount,
       generatedAt: new Date().toISOString(),
     };

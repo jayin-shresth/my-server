@@ -1,16 +1,12 @@
-import { InMemoryPharmacyRepository } from './pharmacy.repository.js';
+import { SQLitePharmacyRepository } from './pharmacy.repository.sqlite.js';
 import { PharmacyService } from './pharmacy.service.js';
 
 /**
  * Module-level singleton. This is the only place PharmacyRepository is
- * constructed. Swap InMemoryPharmacyRepository for the SQLite
- * implementation here once it exists — pharmacy.tools.ts never changes.
- *
- * Wiring lives here (not in PharmacyTools' constructor) because NitroStack
- * appears to instantiate tool classes itself with no arguments (see
- * CalculatorTools, which has no constructor). A required constructor
- * parameter on PharmacyTools would break that instantiation, so injection
- * happens via this shared instance instead.
+ * constructed. NitroStack appears to instantiate tool classes itself with
+ * no arguments (see CalculatorTools), so injection happens via this shared
+ * instance rather than through PharmacyTools' constructor.
  */
-const pharmacyRepository = new InMemoryPharmacyRepository();
+const pharmacyRepository = new SQLitePharmacyRepository();
+
 export const pharmacyService = new PharmacyService(pharmacyRepository);
