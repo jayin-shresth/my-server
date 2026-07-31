@@ -1,4 +1,4 @@
-import { PharmacyRepository } from "./pharmacy.repository";
+import { PharmacyRepository } from "./pharmacy.repository.js";
 import {
   GetPharmacyStatusInput,
   GetPharmacyStatusOutput,
