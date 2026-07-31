@@ -35,6 +35,13 @@ pids/
 *.seed
 *.pid.lock
 
+# Local SQLite databases (keep Prisma schema and migrations tracked)
+prisma/*.db
+prisma/*.db-journal
+/data/
+*.sqlite
+*.sqlite3
+
 # Coverage
 coverage/
 .nyc_output/

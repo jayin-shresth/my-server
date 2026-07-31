@@ -3,6 +3,10 @@
 Minimal template for learning NitroStack fundamentals with a calculator-focused
 MCP server and basic widgets.
 
+The CareFlow Logistics database foundation is documented in
+[`DATABASE.md`](./DATABASE.md), including setup, deterministic scenarios,
+validation, and MCP-ready access boundaries.
+
 ## What This Template Includes
 
 - `calculator` module with tools, resources, and prompts
