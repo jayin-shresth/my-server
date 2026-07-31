@@ -1,6 +1,14 @@
 import { ToolDecorator as Tool, ExecutionContext, z } from '@nitrostack/core';
-import { pharmacyService } from './pharmacy.instance.js';
-import { GetPharmacyStatusInputSchema } from './pharmacy.types.js';
+import {
+  pharmacyService,
+  recommendationService,
+} from "./pharmacy.instance.js";
+
+import { GetPharmacyStatusInputSchema } from "./pharmacy.types.js";
+
+import {
+  RecommendPharmacyReorderInputSchema,  
+} from "./pharmacy.recommendations.js";
 
 /** MCP tools for the Pharmacy module. */
 export class PharmacyTools {
@@ -63,6 +71,33 @@ export class PharmacyTools {
       criticalCount: result.summary.criticalCount,
       lowCount: result.summary.lowCount,
       expiringSoonCount: result.summary.expiringSoonCount
+    });
+
+    return result;
+  }
+    @Tool({
+    name: "recommend_pharmacy_reorder",
+    description:
+      "Generate AI-driven pharmacy inventory recommendations based on current stock levels and expiry information. " +
+      "This tool is read-only and provides recommended actions such as reordering, quarantining expired stock, " +
+      "or delaying purchases. It never modifies inventory.",
+    inputSchema: RecommendPharmacyReorderInputSchema,
+  })
+  async recommendPharmacyReorder(input: any, ctx: ExecutionContext) {
+    ctx.logger.info("Executing recommend_pharmacy_reorder", {
+      category: input?.category,
+      includeLowPriority: input?.includeLowPriority,
+      expiringWithinDays: input?.expiringWithinDays,
+    });
+
+    const parsedInput =
+      RecommendPharmacyReorderInputSchema.parse(input);
+
+    const result =
+      await recommendationService.recommendReorders(parsedInput);
+
+    ctx.logger.info("Completed recommend_pharmacy_reorder", {
+      recommendations: result.recommendations.length,
     });
 
     return result;

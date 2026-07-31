@@ -1,5 +1,6 @@
 import { SQLitePharmacyRepository } from './pharmacy.repository.sqlite.js';
 import { PharmacyService } from './pharmacy.service.js';
+import { RecommendationService } from './recommendation.service.js';
 
 /**
  * Module-level singleton. This is the only place PharmacyRepository is
@@ -10,3 +11,6 @@ import { PharmacyService } from './pharmacy.service.js';
 const pharmacyRepository = new SQLitePharmacyRepository();
 
 export const pharmacyService = new PharmacyService(pharmacyRepository);
+
+export const recommendationService =
+  new RecommendationService(pharmacyService);
