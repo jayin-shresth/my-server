@@ -23,6 +23,7 @@ model Organization {
   suppliers   Supplier[]
   workflows   WorkflowRun[]
   auditEvents AuditEvent[]
+  shifts      Shift[]
 }
 
 model Location {
@@ -49,6 +50,8 @@ model Location {
   quarantineActions QuarantineAction[]
   assets            Asset[]
   assetAllocations  AssetAllocation[]
+  homeStaffProfiles StaffProfile[]         @relation("StaffHomeLocation")
+  shifts            Shift[]
 
   @@index([organizationId])
 }
@@ -65,17 +68,19 @@ model Role {
 }
 
 model User {
-  id                String             @id
-  organizationId    String
-  employeeCode      String             @unique
-  displayName       String
-  email             String             @unique
-  active            Boolean            @default(true)
-  organization      Organization       @relation(fields: [organizationId], references: [id], onDelete: Restrict)
-  assignments       UserAssignment[]
-  requirements      Requirement[]      @relation("RequirementRequester")
-  approvalDecisions ApprovalDecision[]
-  assetAllocations  AssetAllocation[]  @relation("AssetAllocatedBy")
+  id                     String                @id
+  organizationId         String
+  employeeCode           String                @unique
+  displayName            String
+  email                  String                @unique
+  active                 Boolean               @default(true)
+  organization           Organization          @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  assignments            UserAssignment[]
+  requirements           Requirement[]         @relation("RequirementRequester")
+  approvalDecisions      ApprovalDecision[]
+  assetAllocations       AssetAllocation[]     @relation("AssetAllocatedBy")
+  staffProfile           StaffProfile?
+  approvedUnavailability StaffUnavailability[] @relation("UnavailabilityApprover")
 }
 
 model UserAssignment {
@@ -89,6 +94,105 @@ model UserAssignment {
   location   Location? @relation(fields: [locationId], references: [id], onDelete: Restrict)
 
   @@unique([userId, roleId, locationId])
+}
+
+model StaffProfile {
+  id                        String                @id
+  userId                    String                @unique
+  homeLocationId            String
+  staffType                 String
+  employmentStatus          String
+  contractMinutesPerWeek    Int
+  maxMinutesPerWeek         Int
+  minRestMinutes            Int
+  maxConsecutiveShifts      Int
+  maxConsecutiveNightShifts Int
+  active                    Boolean               @default(true)
+  createdAt                 DateTime
+  updatedAt                 DateTime
+  user                      User                  @relation(fields: [userId], references: [id], onDelete: Restrict)
+  homeLocation              Location              @relation("StaffHomeLocation", fields: [homeLocationId], references: [id], onDelete: Restrict)
+  skills                    StaffSkill[]
+  assignments               ShiftAssignment[]
+  unavailability            StaffUnavailability[]
+
+  @@index([staffType, employmentStatus, active])
+}
+
+model StaffSkill {
+  id               String       @id
+  staffProfileId   String
+  skillCode        String
+  proficiencyLevel String
+  validFrom        DateTime
+  validUntil       DateTime?
+  active           Boolean      @default(true)
+  staffProfile     StaffProfile @relation(fields: [staffProfileId], references: [id], onDelete: Restrict)
+
+  @@unique([staffProfileId, skillCode])
+  @@index([skillCode, active, validUntil])
+}
+
+model Shift {
+  id                String            @id
+  code              String            @unique
+  organizationId    String
+  locationId        String
+  rosterWeekStart   DateTime
+  shiftType         String
+  startsAt          DateTime
+  endsAt            DateTime
+  requiredStaffType String
+  requiredSkillCode String
+  requiredHeadcount Int
+  status            String
+  createdAt         DateTime
+  updatedAt         DateTime
+  organization      Organization      @relation(fields: [organizationId], references: [id], onDelete: Restrict)
+  location          Location          @relation(fields: [locationId], references: [id], onDelete: Restrict)
+  assignments       ShiftAssignment[]
+
+  @@unique([locationId, startsAt, requiredStaffType, requiredSkillCode])
+  @@index([rosterWeekStart, locationId, status])
+  @@index([startsAt, endsAt])
+}
+
+model ShiftAssignment {
+  id               String          @id
+  code             String          @unique
+  shiftId          String
+  staffProfileId   String
+  preparedActionId String?
+  status           String
+  source           String
+  assignedAt       DateTime
+  assignedByType   String
+  assignedById     String?
+  notes            String
+  shift            Shift           @relation(fields: [shiftId], references: [id], onDelete: Restrict)
+  staffProfile     StaffProfile    @relation(fields: [staffProfileId], references: [id], onDelete: Restrict)
+  preparedAction   PreparedAction? @relation(fields: [preparedActionId], references: [id], onDelete: Restrict)
+
+  @@unique([shiftId, staffProfileId])
+  @@index([staffProfileId, status])
+  @@index([shiftId, status])
+}
+
+model StaffUnavailability {
+  id                 String       @id
+  code               String       @unique
+  staffProfileId     String
+  approvedByUserId   String?
+  unavailabilityType String
+  status             String
+  startsAt           DateTime
+  endsAt             DateTime
+  reason             String
+  recordedAt         DateTime
+  staffProfile       StaffProfile @relation(fields: [staffProfileId], references: [id], onDelete: Restrict)
+  approvedBy         User?        @relation("UnavailabilityApprover", fields: [approvedByUserId], references: [id], onDelete: Restrict)
+
+  @@index([staffProfileId, startsAt, endsAt, status])
 }
 
 model ItemCategory {
@@ -616,23 +720,47 @@ model WorkflowRun {
 }
 
 model PreparedAction {
-  id               String            @id
-  code             String            @unique
-  workflowRunId    String
-  actionType       String
-  requesterType    String
-  requesterId      String?
-  status           String
-  amountPaise      Int?
-  targetType       String
-  targetId         String
-  payloadJson      String
-  evidenceJson     String
-  reasoningSummary String
-  preparedAt       DateTime
-  workflowRun      WorkflowRun       @relation(fields: [workflowRunId], references: [id], onDelete: Restrict)
-  approvalRequests ApprovalRequest[]
-  executions       ActionExecution[]
+  id                     String                 @id
+  code                   String                 @unique
+  workflowRunId          String
+  actionType             String
+  requesterType          String
+  requesterId            String?
+  status                 String
+  amountPaise            Int?
+  targetType             String
+  targetId               String
+  payloadJson            String
+  evidenceJson           String
+  reasoningSummary       String
+  preparedAt             DateTime
+  workflowRun            WorkflowRun            @relation(fields: [workflowRunId], references: [id], onDelete: Restrict)
+  approvalRequests       ApprovalRequest[]
+  executions             ActionExecution[]
+  shiftAssignments       ShiftAssignment[]
+  notificationDeliveries NotificationDelivery[]
+}
+
+model NotificationDelivery {
+  id                String         @id
+  code              String         @unique
+  preparedActionId  String
+  idempotencyKey    String         @unique
+  channel           String
+  purpose           String
+  recipientMasked   String
+  recipientHash     String
+  status            String
+  providerMessageId String?
+  attemptCount      Int            @default(0)
+  requestedAt       DateTime
+  sentAt            DateTime?
+  failedAt          DateTime?
+  lastError         String?
+  preparedAction    PreparedAction @relation(fields: [preparedActionId], references: [id], onDelete: Restrict)
+
+  @@unique([preparedActionId, channel])
+  @@index([status, requestedAt])
 }
 
 model ApprovalRequest {

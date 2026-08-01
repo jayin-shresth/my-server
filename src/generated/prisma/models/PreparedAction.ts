@@ -291,6 +291,8 @@ export type PreparedActionWhereInput = {
   workflowRun?: Prisma.XOR<Prisma.WorkflowRunScalarRelationFilter, Prisma.WorkflowRunWhereInput>
   approvalRequests?: Prisma.ApprovalRequestListRelationFilter
   executions?: Prisma.ActionExecutionListRelationFilter
+  shiftAssignments?: Prisma.ShiftAssignmentListRelationFilter
+  notificationDeliveries?: Prisma.NotificationDeliveryListRelationFilter
 }
 
 export type PreparedActionOrderByWithRelationInput = {
@@ -311,6 +313,8 @@ export type PreparedActionOrderByWithRelationInput = {
   workflowRun?: Prisma.WorkflowRunOrderByWithRelationInput
   approvalRequests?: Prisma.ApprovalRequestOrderByRelationAggregateInput
   executions?: Prisma.ActionExecutionOrderByRelationAggregateInput
+  shiftAssignments?: Prisma.ShiftAssignmentOrderByRelationAggregateInput
+  notificationDeliveries?: Prisma.NotificationDeliveryOrderByRelationAggregateInput
 }
 
 export type PreparedActionWhereUniqueInput = Prisma.AtLeast<{
@@ -334,6 +338,8 @@ export type PreparedActionWhereUniqueInput = Prisma.AtLeast<{
   workflowRun?: Prisma.XOR<Prisma.WorkflowRunScalarRelationFilter, Prisma.WorkflowRunWhereInput>
   approvalRequests?: Prisma.ApprovalRequestListRelationFilter
   executions?: Prisma.ActionExecutionListRelationFilter
+  shiftAssignments?: Prisma.ShiftAssignmentListRelationFilter
+  notificationDeliveries?: Prisma.NotificationDeliveryListRelationFilter
 }, "id" | "code">
 
 export type PreparedActionOrderByWithAggregationInput = {
@@ -395,6 +401,8 @@ export type PreparedActionCreateInput = {
   workflowRun: Prisma.WorkflowRunCreateNestedOneWithoutPreparedActionsInput
   approvalRequests?: Prisma.ApprovalRequestCreateNestedManyWithoutPreparedActionInput
   executions?: Prisma.ActionExecutionCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionUncheckedCreateInput = {
@@ -414,6 +422,8 @@ export type PreparedActionUncheckedCreateInput = {
   preparedAt: Date | string
   approvalRequests?: Prisma.ApprovalRequestUncheckedCreateNestedManyWithoutPreparedActionInput
   executions?: Prisma.ActionExecutionUncheckedCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionUpdateInput = {
@@ -433,6 +443,8 @@ export type PreparedActionUpdateInput = {
   workflowRun?: Prisma.WorkflowRunUpdateOneRequiredWithoutPreparedActionsNestedInput
   approvalRequests?: Prisma.ApprovalRequestUpdateManyWithoutPreparedActionNestedInput
   executions?: Prisma.ActionExecutionUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionUncheckedUpdateInput = {
@@ -452,6 +464,8 @@ export type PreparedActionUncheckedUpdateInput = {
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvalRequests?: Prisma.ApprovalRequestUncheckedUpdateManyWithoutPreparedActionNestedInput
   executions?: Prisma.ActionExecutionUncheckedUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionCreateManyInput = {
@@ -502,6 +516,11 @@ export type PreparedActionUncheckedUpdateManyInput = {
   evidenceJson?: Prisma.StringFieldUpdateOperationsInput | string
   reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PreparedActionNullableScalarRelationFilter = {
+  is?: Prisma.PreparedActionWhereInput | null
+  isNot?: Prisma.PreparedActionWhereInput | null
 }
 
 export type PreparedActionListRelationFilter = {
@@ -578,6 +597,22 @@ export type PreparedActionScalarRelationFilter = {
   isNot?: Prisma.PreparedActionWhereInput
 }
 
+export type PreparedActionCreateNestedOneWithoutShiftAssignmentsInput = {
+  create?: Prisma.XOR<Prisma.PreparedActionCreateWithoutShiftAssignmentsInput, Prisma.PreparedActionUncheckedCreateWithoutShiftAssignmentsInput>
+  connectOrCreate?: Prisma.PreparedActionCreateOrConnectWithoutShiftAssignmentsInput
+  connect?: Prisma.PreparedActionWhereUniqueInput
+}
+
+export type PreparedActionUpdateOneWithoutShiftAssignmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.PreparedActionCreateWithoutShiftAssignmentsInput, Prisma.PreparedActionUncheckedCreateWithoutShiftAssignmentsInput>
+  connectOrCreate?: Prisma.PreparedActionCreateOrConnectWithoutShiftAssignmentsInput
+  upsert?: Prisma.PreparedActionUpsertWithoutShiftAssignmentsInput
+  disconnect?: Prisma.PreparedActionWhereInput | boolean
+  delete?: Prisma.PreparedActionWhereInput | boolean
+  connect?: Prisma.PreparedActionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PreparedActionUpdateToOneWithWhereWithoutShiftAssignmentsInput, Prisma.PreparedActionUpdateWithoutShiftAssignmentsInput>, Prisma.PreparedActionUncheckedUpdateWithoutShiftAssignmentsInput>
+}
+
 export type PreparedActionCreateNestedManyWithoutWorkflowRunInput = {
   create?: Prisma.XOR<Prisma.PreparedActionCreateWithoutWorkflowRunInput, Prisma.PreparedActionUncheckedCreateWithoutWorkflowRunInput> | Prisma.PreparedActionCreateWithoutWorkflowRunInput[] | Prisma.PreparedActionUncheckedCreateWithoutWorkflowRunInput[]
   connectOrCreate?: Prisma.PreparedActionCreateOrConnectWithoutWorkflowRunInput | Prisma.PreparedActionCreateOrConnectWithoutWorkflowRunInput[]
@@ -620,6 +655,20 @@ export type PreparedActionUncheckedUpdateManyWithoutWorkflowRunNestedInput = {
   deleteMany?: Prisma.PreparedActionScalarWhereInput | Prisma.PreparedActionScalarWhereInput[]
 }
 
+export type PreparedActionCreateNestedOneWithoutNotificationDeliveriesInput = {
+  create?: Prisma.XOR<Prisma.PreparedActionCreateWithoutNotificationDeliveriesInput, Prisma.PreparedActionUncheckedCreateWithoutNotificationDeliveriesInput>
+  connectOrCreate?: Prisma.PreparedActionCreateOrConnectWithoutNotificationDeliveriesInput
+  connect?: Prisma.PreparedActionWhereUniqueInput
+}
+
+export type PreparedActionUpdateOneRequiredWithoutNotificationDeliveriesNestedInput = {
+  create?: Prisma.XOR<Prisma.PreparedActionCreateWithoutNotificationDeliveriesInput, Prisma.PreparedActionUncheckedCreateWithoutNotificationDeliveriesInput>
+  connectOrCreate?: Prisma.PreparedActionCreateOrConnectWithoutNotificationDeliveriesInput
+  upsert?: Prisma.PreparedActionUpsertWithoutNotificationDeliveriesInput
+  connect?: Prisma.PreparedActionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PreparedActionUpdateToOneWithWhereWithoutNotificationDeliveriesInput, Prisma.PreparedActionUpdateWithoutNotificationDeliveriesInput>, Prisma.PreparedActionUncheckedUpdateWithoutNotificationDeliveriesInput>
+}
+
 export type PreparedActionCreateNestedOneWithoutApprovalRequestsInput = {
   create?: Prisma.XOR<Prisma.PreparedActionCreateWithoutApprovalRequestsInput, Prisma.PreparedActionUncheckedCreateWithoutApprovalRequestsInput>
   connectOrCreate?: Prisma.PreparedActionCreateOrConnectWithoutApprovalRequestsInput
@@ -648,6 +697,102 @@ export type PreparedActionUpdateOneRequiredWithoutExecutionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PreparedActionUpdateToOneWithWhereWithoutExecutionsInput, Prisma.PreparedActionUpdateWithoutExecutionsInput>, Prisma.PreparedActionUncheckedUpdateWithoutExecutionsInput>
 }
 
+export type PreparedActionCreateWithoutShiftAssignmentsInput = {
+  id: string
+  code: string
+  actionType: string
+  requesterType: string
+  requesterId?: string | null
+  status: string
+  amountPaise?: number | null
+  targetType: string
+  targetId: string
+  payloadJson: string
+  evidenceJson: string
+  reasoningSummary: string
+  preparedAt: Date | string
+  workflowRun: Prisma.WorkflowRunCreateNestedOneWithoutPreparedActionsInput
+  approvalRequests?: Prisma.ApprovalRequestCreateNestedManyWithoutPreparedActionInput
+  executions?: Prisma.ActionExecutionCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutPreparedActionInput
+}
+
+export type PreparedActionUncheckedCreateWithoutShiftAssignmentsInput = {
+  id: string
+  code: string
+  workflowRunId: string
+  actionType: string
+  requesterType: string
+  requesterId?: string | null
+  status: string
+  amountPaise?: number | null
+  targetType: string
+  targetId: string
+  payloadJson: string
+  evidenceJson: string
+  reasoningSummary: string
+  preparedAt: Date | string
+  approvalRequests?: Prisma.ApprovalRequestUncheckedCreateNestedManyWithoutPreparedActionInput
+  executions?: Prisma.ActionExecutionUncheckedCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutPreparedActionInput
+}
+
+export type PreparedActionCreateOrConnectWithoutShiftAssignmentsInput = {
+  where: Prisma.PreparedActionWhereUniqueInput
+  create: Prisma.XOR<Prisma.PreparedActionCreateWithoutShiftAssignmentsInput, Prisma.PreparedActionUncheckedCreateWithoutShiftAssignmentsInput>
+}
+
+export type PreparedActionUpsertWithoutShiftAssignmentsInput = {
+  update: Prisma.XOR<Prisma.PreparedActionUpdateWithoutShiftAssignmentsInput, Prisma.PreparedActionUncheckedUpdateWithoutShiftAssignmentsInput>
+  create: Prisma.XOR<Prisma.PreparedActionCreateWithoutShiftAssignmentsInput, Prisma.PreparedActionUncheckedCreateWithoutShiftAssignmentsInput>
+  where?: Prisma.PreparedActionWhereInput
+}
+
+export type PreparedActionUpdateToOneWithWhereWithoutShiftAssignmentsInput = {
+  where?: Prisma.PreparedActionWhereInput
+  data: Prisma.XOR<Prisma.PreparedActionUpdateWithoutShiftAssignmentsInput, Prisma.PreparedActionUncheckedUpdateWithoutShiftAssignmentsInput>
+}
+
+export type PreparedActionUpdateWithoutShiftAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  actionType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amountPaise?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  targetType?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  payloadJson?: Prisma.StringFieldUpdateOperationsInput | string
+  evidenceJson?: Prisma.StringFieldUpdateOperationsInput | string
+  reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
+  preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workflowRun?: Prisma.WorkflowRunUpdateOneRequiredWithoutPreparedActionsNestedInput
+  approvalRequests?: Prisma.ApprovalRequestUpdateManyWithoutPreparedActionNestedInput
+  executions?: Prisma.ActionExecutionUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutPreparedActionNestedInput
+}
+
+export type PreparedActionUncheckedUpdateWithoutShiftAssignmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  workflowRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  actionType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amountPaise?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  targetType?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  payloadJson?: Prisma.StringFieldUpdateOperationsInput | string
+  evidenceJson?: Prisma.StringFieldUpdateOperationsInput | string
+  reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
+  preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvalRequests?: Prisma.ApprovalRequestUncheckedUpdateManyWithoutPreparedActionNestedInput
+  executions?: Prisma.ActionExecutionUncheckedUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutPreparedActionNestedInput
+}
+
 export type PreparedActionCreateWithoutWorkflowRunInput = {
   id: string
   code: string
@@ -664,6 +809,8 @@ export type PreparedActionCreateWithoutWorkflowRunInput = {
   preparedAt: Date | string
   approvalRequests?: Prisma.ApprovalRequestCreateNestedManyWithoutPreparedActionInput
   executions?: Prisma.ActionExecutionCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionUncheckedCreateWithoutWorkflowRunInput = {
@@ -682,6 +829,8 @@ export type PreparedActionUncheckedCreateWithoutWorkflowRunInput = {
   preparedAt: Date | string
   approvalRequests?: Prisma.ApprovalRequestUncheckedCreateNestedManyWithoutPreparedActionInput
   executions?: Prisma.ActionExecutionUncheckedCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionCreateOrConnectWithoutWorkflowRunInput = {
@@ -729,6 +878,102 @@ export type PreparedActionScalarWhereInput = {
   preparedAt?: Prisma.DateTimeFilter<"PreparedAction"> | Date | string
 }
 
+export type PreparedActionCreateWithoutNotificationDeliveriesInput = {
+  id: string
+  code: string
+  actionType: string
+  requesterType: string
+  requesterId?: string | null
+  status: string
+  amountPaise?: number | null
+  targetType: string
+  targetId: string
+  payloadJson: string
+  evidenceJson: string
+  reasoningSummary: string
+  preparedAt: Date | string
+  workflowRun: Prisma.WorkflowRunCreateNestedOneWithoutPreparedActionsInput
+  approvalRequests?: Prisma.ApprovalRequestCreateNestedManyWithoutPreparedActionInput
+  executions?: Prisma.ActionExecutionCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentCreateNestedManyWithoutPreparedActionInput
+}
+
+export type PreparedActionUncheckedCreateWithoutNotificationDeliveriesInput = {
+  id: string
+  code: string
+  workflowRunId: string
+  actionType: string
+  requesterType: string
+  requesterId?: string | null
+  status: string
+  amountPaise?: number | null
+  targetType: string
+  targetId: string
+  payloadJson: string
+  evidenceJson: string
+  reasoningSummary: string
+  preparedAt: Date | string
+  approvalRequests?: Prisma.ApprovalRequestUncheckedCreateNestedManyWithoutPreparedActionInput
+  executions?: Prisma.ActionExecutionUncheckedCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedCreateNestedManyWithoutPreparedActionInput
+}
+
+export type PreparedActionCreateOrConnectWithoutNotificationDeliveriesInput = {
+  where: Prisma.PreparedActionWhereUniqueInput
+  create: Prisma.XOR<Prisma.PreparedActionCreateWithoutNotificationDeliveriesInput, Prisma.PreparedActionUncheckedCreateWithoutNotificationDeliveriesInput>
+}
+
+export type PreparedActionUpsertWithoutNotificationDeliveriesInput = {
+  update: Prisma.XOR<Prisma.PreparedActionUpdateWithoutNotificationDeliveriesInput, Prisma.PreparedActionUncheckedUpdateWithoutNotificationDeliveriesInput>
+  create: Prisma.XOR<Prisma.PreparedActionCreateWithoutNotificationDeliveriesInput, Prisma.PreparedActionUncheckedCreateWithoutNotificationDeliveriesInput>
+  where?: Prisma.PreparedActionWhereInput
+}
+
+export type PreparedActionUpdateToOneWithWhereWithoutNotificationDeliveriesInput = {
+  where?: Prisma.PreparedActionWhereInput
+  data: Prisma.XOR<Prisma.PreparedActionUpdateWithoutNotificationDeliveriesInput, Prisma.PreparedActionUncheckedUpdateWithoutNotificationDeliveriesInput>
+}
+
+export type PreparedActionUpdateWithoutNotificationDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  actionType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amountPaise?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  targetType?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  payloadJson?: Prisma.StringFieldUpdateOperationsInput | string
+  evidenceJson?: Prisma.StringFieldUpdateOperationsInput | string
+  reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
+  preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  workflowRun?: Prisma.WorkflowRunUpdateOneRequiredWithoutPreparedActionsNestedInput
+  approvalRequests?: Prisma.ApprovalRequestUpdateManyWithoutPreparedActionNestedInput
+  executions?: Prisma.ActionExecutionUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUpdateManyWithoutPreparedActionNestedInput
+}
+
+export type PreparedActionUncheckedUpdateWithoutNotificationDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  workflowRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  actionType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterType?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  amountPaise?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  targetType?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  payloadJson?: Prisma.StringFieldUpdateOperationsInput | string
+  evidenceJson?: Prisma.StringFieldUpdateOperationsInput | string
+  reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
+  preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  approvalRequests?: Prisma.ApprovalRequestUncheckedUpdateManyWithoutPreparedActionNestedInput
+  executions?: Prisma.ActionExecutionUncheckedUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedUpdateManyWithoutPreparedActionNestedInput
+}
+
 export type PreparedActionCreateWithoutApprovalRequestsInput = {
   id: string
   code: string
@@ -745,6 +990,8 @@ export type PreparedActionCreateWithoutApprovalRequestsInput = {
   preparedAt: Date | string
   workflowRun: Prisma.WorkflowRunCreateNestedOneWithoutPreparedActionsInput
   executions?: Prisma.ActionExecutionCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionUncheckedCreateWithoutApprovalRequestsInput = {
@@ -763,6 +1010,8 @@ export type PreparedActionUncheckedCreateWithoutApprovalRequestsInput = {
   reasoningSummary: string
   preparedAt: Date | string
   executions?: Prisma.ActionExecutionUncheckedCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionCreateOrConnectWithoutApprovalRequestsInput = {
@@ -797,6 +1046,8 @@ export type PreparedActionUpdateWithoutApprovalRequestsInput = {
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workflowRun?: Prisma.WorkflowRunUpdateOneRequiredWithoutPreparedActionsNestedInput
   executions?: Prisma.ActionExecutionUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionUncheckedUpdateWithoutApprovalRequestsInput = {
@@ -815,6 +1066,8 @@ export type PreparedActionUncheckedUpdateWithoutApprovalRequestsInput = {
   reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   executions?: Prisma.ActionExecutionUncheckedUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionCreateWithoutExecutionsInput = {
@@ -833,6 +1086,8 @@ export type PreparedActionCreateWithoutExecutionsInput = {
   preparedAt: Date | string
   workflowRun: Prisma.WorkflowRunCreateNestedOneWithoutPreparedActionsInput
   approvalRequests?: Prisma.ApprovalRequestCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionUncheckedCreateWithoutExecutionsInput = {
@@ -851,6 +1106,8 @@ export type PreparedActionUncheckedCreateWithoutExecutionsInput = {
   reasoningSummary: string
   preparedAt: Date | string
   approvalRequests?: Prisma.ApprovalRequestUncheckedCreateNestedManyWithoutPreparedActionInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedCreateNestedManyWithoutPreparedActionInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedCreateNestedManyWithoutPreparedActionInput
 }
 
 export type PreparedActionCreateOrConnectWithoutExecutionsInput = {
@@ -885,6 +1142,8 @@ export type PreparedActionUpdateWithoutExecutionsInput = {
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workflowRun?: Prisma.WorkflowRunUpdateOneRequiredWithoutPreparedActionsNestedInput
   approvalRequests?: Prisma.ApprovalRequestUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionUncheckedUpdateWithoutExecutionsInput = {
@@ -903,6 +1162,8 @@ export type PreparedActionUncheckedUpdateWithoutExecutionsInput = {
   reasoningSummary?: Prisma.StringFieldUpdateOperationsInput | string
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvalRequests?: Prisma.ApprovalRequestUncheckedUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionCreateManyWorkflowRunInput = {
@@ -937,6 +1198,8 @@ export type PreparedActionUpdateWithoutWorkflowRunInput = {
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvalRequests?: Prisma.ApprovalRequestUpdateManyWithoutPreparedActionNestedInput
   executions?: Prisma.ActionExecutionUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionUncheckedUpdateWithoutWorkflowRunInput = {
@@ -955,6 +1218,8 @@ export type PreparedActionUncheckedUpdateWithoutWorkflowRunInput = {
   preparedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvalRequests?: Prisma.ApprovalRequestUncheckedUpdateManyWithoutPreparedActionNestedInput
   executions?: Prisma.ActionExecutionUncheckedUpdateManyWithoutPreparedActionNestedInput
+  shiftAssignments?: Prisma.ShiftAssignmentUncheckedUpdateManyWithoutPreparedActionNestedInput
+  notificationDeliveries?: Prisma.NotificationDeliveryUncheckedUpdateManyWithoutPreparedActionNestedInput
 }
 
 export type PreparedActionUncheckedUpdateManyWithoutWorkflowRunInput = {
@@ -981,11 +1246,15 @@ export type PreparedActionUncheckedUpdateManyWithoutWorkflowRunInput = {
 export type PreparedActionCountOutputType = {
   approvalRequests: number
   executions: number
+  shiftAssignments: number
+  notificationDeliveries: number
 }
 
 export type PreparedActionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   approvalRequests?: boolean | PreparedActionCountOutputTypeCountApprovalRequestsArgs
   executions?: boolean | PreparedActionCountOutputTypeCountExecutionsArgs
+  shiftAssignments?: boolean | PreparedActionCountOutputTypeCountShiftAssignmentsArgs
+  notificationDeliveries?: boolean | PreparedActionCountOutputTypeCountNotificationDeliveriesArgs
 }
 
 /**
@@ -1012,6 +1281,20 @@ export type PreparedActionCountOutputTypeCountExecutionsArgs<ExtArgs extends run
   where?: Prisma.ActionExecutionWhereInput
 }
 
+/**
+ * PreparedActionCountOutputType without action
+ */
+export type PreparedActionCountOutputTypeCountShiftAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftAssignmentWhereInput
+}
+
+/**
+ * PreparedActionCountOutputType without action
+ */
+export type PreparedActionCountOutputTypeCountNotificationDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationDeliveryWhereInput
+}
+
 
 export type PreparedActionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1031,6 +1314,8 @@ export type PreparedActionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   workflowRun?: boolean | Prisma.WorkflowRunDefaultArgs<ExtArgs>
   approvalRequests?: boolean | Prisma.PreparedAction$approvalRequestsArgs<ExtArgs>
   executions?: boolean | Prisma.PreparedAction$executionsArgs<ExtArgs>
+  shiftAssignments?: boolean | Prisma.PreparedAction$shiftAssignmentsArgs<ExtArgs>
+  notificationDeliveries?: boolean | Prisma.PreparedAction$notificationDeliveriesArgs<ExtArgs>
   _count?: boolean | Prisma.PreparedActionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["preparedAction"]>
 
@@ -1092,6 +1377,8 @@ export type PreparedActionInclude<ExtArgs extends runtime.Types.Extensions.Inter
   workflowRun?: boolean | Prisma.WorkflowRunDefaultArgs<ExtArgs>
   approvalRequests?: boolean | Prisma.PreparedAction$approvalRequestsArgs<ExtArgs>
   executions?: boolean | Prisma.PreparedAction$executionsArgs<ExtArgs>
+  shiftAssignments?: boolean | Prisma.PreparedAction$shiftAssignmentsArgs<ExtArgs>
+  notificationDeliveries?: boolean | Prisma.PreparedAction$notificationDeliveriesArgs<ExtArgs>
   _count?: boolean | Prisma.PreparedActionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PreparedActionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1107,6 +1394,8 @@ export type $PreparedActionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     workflowRun: Prisma.$WorkflowRunPayload<ExtArgs>
     approvalRequests: Prisma.$ApprovalRequestPayload<ExtArgs>[]
     executions: Prisma.$ActionExecutionPayload<ExtArgs>[]
+    shiftAssignments: Prisma.$ShiftAssignmentPayload<ExtArgs>[]
+    notificationDeliveries: Prisma.$NotificationDeliveryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1520,6 +1809,8 @@ export interface Prisma__PreparedActionClient<T, Null = never, ExtArgs extends r
   workflowRun<T extends Prisma.WorkflowRunDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WorkflowRunDefaultArgs<ExtArgs>>): Prisma.Prisma__WorkflowRunClient<runtime.Types.Result.GetResult<Prisma.$WorkflowRunPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   approvalRequests<T extends Prisma.PreparedAction$approvalRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PreparedAction$approvalRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   executions<T extends Prisma.PreparedAction$executionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PreparedAction$executionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActionExecutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shiftAssignments<T extends Prisma.PreparedAction$shiftAssignmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PreparedAction$shiftAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationDeliveries<T extends Prisma.PreparedAction$notificationDeliveriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PreparedAction$notificationDeliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2007,6 +2298,54 @@ export type PreparedAction$executionsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ActionExecutionScalarFieldEnum | Prisma.ActionExecutionScalarFieldEnum[]
+}
+
+/**
+ * PreparedAction.shiftAssignments
+ */
+export type PreparedAction$shiftAssignmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShiftAssignment
+   */
+  select?: Prisma.ShiftAssignmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShiftAssignment
+   */
+  omit?: Prisma.ShiftAssignmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShiftAssignmentInclude<ExtArgs> | null
+  where?: Prisma.ShiftAssignmentWhereInput
+  orderBy?: Prisma.ShiftAssignmentOrderByWithRelationInput | Prisma.ShiftAssignmentOrderByWithRelationInput[]
+  cursor?: Prisma.ShiftAssignmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShiftAssignmentScalarFieldEnum | Prisma.ShiftAssignmentScalarFieldEnum[]
+}
+
+/**
+ * PreparedAction.notificationDeliveries
+ */
+export type PreparedAction$notificationDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationDelivery
+   */
+  select?: Prisma.NotificationDeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationDelivery
+   */
+  omit?: Prisma.NotificationDeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationDeliveryInclude<ExtArgs> | null
+  where?: Prisma.NotificationDeliveryWhereInput
+  orderBy?: Prisma.NotificationDeliveryOrderByWithRelationInput | Prisma.NotificationDeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationDeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationDeliveryScalarFieldEnum | Prisma.NotificationDeliveryScalarFieldEnum[]
 }
 
 /**

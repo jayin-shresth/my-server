@@ -242,6 +242,8 @@ export type LocationWhereInput = {
   quarantineActions?: Prisma.QuarantineActionListRelationFilter
   assets?: Prisma.AssetListRelationFilter
   assetAllocations?: Prisma.AssetAllocationListRelationFilter
+  homeStaffProfiles?: Prisma.StaffProfileListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }
 
 export type LocationOrderByWithRelationInput = {
@@ -268,6 +270,8 @@ export type LocationOrderByWithRelationInput = {
   quarantineActions?: Prisma.QuarantineActionOrderByRelationAggregateInput
   assets?: Prisma.AssetOrderByRelationAggregateInput
   assetAllocations?: Prisma.AssetAllocationOrderByRelationAggregateInput
+  homeStaffProfiles?: Prisma.StaffProfileOrderByRelationAggregateInput
+  shifts?: Prisma.ShiftOrderByRelationAggregateInput
 }
 
 export type LocationWhereUniqueInput = Prisma.AtLeast<{
@@ -297,6 +301,8 @@ export type LocationWhereUniqueInput = Prisma.AtLeast<{
   quarantineActions?: Prisma.QuarantineActionListRelationFilter
   assets?: Prisma.AssetListRelationFilter
   assetAllocations?: Prisma.AssetAllocationListRelationFilter
+  homeStaffProfiles?: Prisma.StaffProfileListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }, "id" | "code">
 
 export type LocationOrderByWithAggregationInput = {
@@ -356,6 +362,8 @@ export type LocationCreateInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateInput = {
@@ -381,6 +389,8 @@ export type LocationUncheckedCreateInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUpdateInput = {
@@ -406,6 +416,8 @@ export type LocationUpdateInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateInput = {
@@ -431,6 +443,8 @@ export type LocationUncheckedUpdateInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyInput = {
@@ -598,6 +612,34 @@ export type LocationUpdateOneWithoutAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.LocationUpdateWithoutAssignmentsInput>, Prisma.LocationUncheckedUpdateWithoutAssignmentsInput>
 }
 
+export type LocationCreateNestedOneWithoutHomeStaffProfilesInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutHomeStaffProfilesInput, Prisma.LocationUncheckedCreateWithoutHomeStaffProfilesInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutHomeStaffProfilesInput
+  connect?: Prisma.LocationWhereUniqueInput
+}
+
+export type LocationUpdateOneRequiredWithoutHomeStaffProfilesNestedInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutHomeStaffProfilesInput, Prisma.LocationUncheckedCreateWithoutHomeStaffProfilesInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutHomeStaffProfilesInput
+  upsert?: Prisma.LocationUpsertWithoutHomeStaffProfilesInput
+  connect?: Prisma.LocationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutHomeStaffProfilesInput, Prisma.LocationUpdateWithoutHomeStaffProfilesInput>, Prisma.LocationUncheckedUpdateWithoutHomeStaffProfilesInput>
+}
+
+export type LocationCreateNestedOneWithoutShiftsInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutShiftsInput, Prisma.LocationUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutShiftsInput
+  connect?: Prisma.LocationWhereUniqueInput
+}
+
+export type LocationUpdateOneRequiredWithoutShiftsNestedInput = {
+  create?: Prisma.XOR<Prisma.LocationCreateWithoutShiftsInput, Prisma.LocationUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.LocationCreateOrConnectWithoutShiftsInput
+  upsert?: Prisma.LocationUpsertWithoutShiftsInput
+  connect?: Prisma.LocationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LocationUpdateToOneWithWhereWithoutShiftsInput, Prisma.LocationUpdateWithoutShiftsInput>, Prisma.LocationUncheckedUpdateWithoutShiftsInput>
+}
+
 export type LocationCreateNestedOneWithoutPoliciesInput = {
   create?: Prisma.XOR<Prisma.LocationCreateWithoutPoliciesInput, Prisma.LocationUncheckedCreateWithoutPoliciesInput>
   connectOrCreate?: Prisma.LocationCreateOrConnectWithoutPoliciesInput
@@ -760,6 +802,8 @@ export type LocationCreateWithoutOrganizationInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutOrganizationInput = {
@@ -784,6 +828,8 @@ export type LocationUncheckedCreateWithoutOrganizationInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutOrganizationInput = {
@@ -850,6 +896,8 @@ export type LocationCreateWithoutAssignmentsInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutAssignmentsInput = {
@@ -874,6 +922,8 @@ export type LocationUncheckedCreateWithoutAssignmentsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutAssignmentsInput = {
@@ -914,6 +964,8 @@ export type LocationUpdateWithoutAssignmentsInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutAssignmentsInput = {
@@ -938,6 +990,248 @@ export type LocationUncheckedUpdateWithoutAssignmentsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
+}
+
+export type LocationCreateWithoutHomeStaffProfilesInput = {
+  id: string
+  code: string
+  name: string
+  locationType: string
+  addressLine: string
+  city: string
+  state: string
+  postalCode: string
+  active?: boolean
+  createdAt: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutLocationsInput
+  assignments?: Prisma.UserAssignmentCreateNestedManyWithoutLocationInput
+  policies?: Prisma.LocationItemPolicyCreateNestedManyWithoutLocationInput
+  stockPositions?: Prisma.StockPositionCreateNestedManyWithoutLocationInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryCreateNestedManyWithoutLocationInput
+  requirements?: Prisma.RequirementCreateNestedManyWithoutLocationInput
+  reservations?: Prisma.ReservationCreateNestedManyWithoutLocationInput
+  outgoingTransfers?: Prisma.TransferCreateNestedManyWithoutSourceInput
+  incomingTransfers?: Prisma.TransferCreateNestedManyWithoutDestinationInput
+  quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
+  assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
+  assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
+}
+
+export type LocationUncheckedCreateWithoutHomeStaffProfilesInput = {
+  id: string
+  organizationId: string
+  code: string
+  name: string
+  locationType: string
+  addressLine: string
+  city: string
+  state: string
+  postalCode: string
+  active?: boolean
+  createdAt: Date | string
+  assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutLocationInput
+  policies?: Prisma.LocationItemPolicyUncheckedCreateNestedManyWithoutLocationInput
+  stockPositions?: Prisma.StockPositionUncheckedCreateNestedManyWithoutLocationInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryUncheckedCreateNestedManyWithoutLocationInput
+  requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutLocationInput
+  reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutLocationInput
+  outgoingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutSourceInput
+  incomingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutDestinationInput
+  quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
+  assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
+}
+
+export type LocationCreateOrConnectWithoutHomeStaffProfilesInput = {
+  where: Prisma.LocationWhereUniqueInput
+  create: Prisma.XOR<Prisma.LocationCreateWithoutHomeStaffProfilesInput, Prisma.LocationUncheckedCreateWithoutHomeStaffProfilesInput>
+}
+
+export type LocationUpsertWithoutHomeStaffProfilesInput = {
+  update: Prisma.XOR<Prisma.LocationUpdateWithoutHomeStaffProfilesInput, Prisma.LocationUncheckedUpdateWithoutHomeStaffProfilesInput>
+  create: Prisma.XOR<Prisma.LocationCreateWithoutHomeStaffProfilesInput, Prisma.LocationUncheckedCreateWithoutHomeStaffProfilesInput>
+  where?: Prisma.LocationWhereInput
+}
+
+export type LocationUpdateToOneWithWhereWithoutHomeStaffProfilesInput = {
+  where?: Prisma.LocationWhereInput
+  data: Prisma.XOR<Prisma.LocationUpdateWithoutHomeStaffProfilesInput, Prisma.LocationUncheckedUpdateWithoutHomeStaffProfilesInput>
+}
+
+export type LocationUpdateWithoutHomeStaffProfilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  locationType?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutLocationsNestedInput
+  assignments?: Prisma.UserAssignmentUpdateManyWithoutLocationNestedInput
+  policies?: Prisma.LocationItemPolicyUpdateManyWithoutLocationNestedInput
+  stockPositions?: Prisma.StockPositionUpdateManyWithoutLocationNestedInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryUpdateManyWithoutLocationNestedInput
+  requirements?: Prisma.RequirementUpdateManyWithoutLocationNestedInput
+  reservations?: Prisma.ReservationUpdateManyWithoutLocationNestedInput
+  outgoingTransfers?: Prisma.TransferUpdateManyWithoutSourceNestedInput
+  incomingTransfers?: Prisma.TransferUpdateManyWithoutDestinationNestedInput
+  quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
+  assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
+  assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
+}
+
+export type LocationUncheckedUpdateWithoutHomeStaffProfilesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  locationType?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutLocationNestedInput
+  policies?: Prisma.LocationItemPolicyUncheckedUpdateManyWithoutLocationNestedInput
+  stockPositions?: Prisma.StockPositionUncheckedUpdateManyWithoutLocationNestedInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryUncheckedUpdateManyWithoutLocationNestedInput
+  requirements?: Prisma.RequirementUncheckedUpdateManyWithoutLocationNestedInput
+  reservations?: Prisma.ReservationUncheckedUpdateManyWithoutLocationNestedInput
+  outgoingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutSourceNestedInput
+  incomingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutDestinationNestedInput
+  quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
+  assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
+}
+
+export type LocationCreateWithoutShiftsInput = {
+  id: string
+  code: string
+  name: string
+  locationType: string
+  addressLine: string
+  city: string
+  state: string
+  postalCode: string
+  active?: boolean
+  createdAt: Date | string
+  organization: Prisma.OrganizationCreateNestedOneWithoutLocationsInput
+  assignments?: Prisma.UserAssignmentCreateNestedManyWithoutLocationInput
+  policies?: Prisma.LocationItemPolicyCreateNestedManyWithoutLocationInput
+  stockPositions?: Prisma.StockPositionCreateNestedManyWithoutLocationInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryCreateNestedManyWithoutLocationInput
+  requirements?: Prisma.RequirementCreateNestedManyWithoutLocationInput
+  reservations?: Prisma.ReservationCreateNestedManyWithoutLocationInput
+  outgoingTransfers?: Prisma.TransferCreateNestedManyWithoutSourceInput
+  incomingTransfers?: Prisma.TransferCreateNestedManyWithoutDestinationInput
+  quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
+  assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
+  assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+}
+
+export type LocationUncheckedCreateWithoutShiftsInput = {
+  id: string
+  organizationId: string
+  code: string
+  name: string
+  locationType: string
+  addressLine: string
+  city: string
+  state: string
+  postalCode: string
+  active?: boolean
+  createdAt: Date | string
+  assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutLocationInput
+  policies?: Prisma.LocationItemPolicyUncheckedCreateNestedManyWithoutLocationInput
+  stockPositions?: Prisma.StockPositionUncheckedCreateNestedManyWithoutLocationInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryUncheckedCreateNestedManyWithoutLocationInput
+  requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutLocationInput
+  reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutLocationInput
+  outgoingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutSourceInput
+  incomingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutDestinationInput
+  quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
+  assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+}
+
+export type LocationCreateOrConnectWithoutShiftsInput = {
+  where: Prisma.LocationWhereUniqueInput
+  create: Prisma.XOR<Prisma.LocationCreateWithoutShiftsInput, Prisma.LocationUncheckedCreateWithoutShiftsInput>
+}
+
+export type LocationUpsertWithoutShiftsInput = {
+  update: Prisma.XOR<Prisma.LocationUpdateWithoutShiftsInput, Prisma.LocationUncheckedUpdateWithoutShiftsInput>
+  create: Prisma.XOR<Prisma.LocationCreateWithoutShiftsInput, Prisma.LocationUncheckedCreateWithoutShiftsInput>
+  where?: Prisma.LocationWhereInput
+}
+
+export type LocationUpdateToOneWithWhereWithoutShiftsInput = {
+  where?: Prisma.LocationWhereInput
+  data: Prisma.XOR<Prisma.LocationUpdateWithoutShiftsInput, Prisma.LocationUncheckedUpdateWithoutShiftsInput>
+}
+
+export type LocationUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  locationType?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutLocationsNestedInput
+  assignments?: Prisma.UserAssignmentUpdateManyWithoutLocationNestedInput
+  policies?: Prisma.LocationItemPolicyUpdateManyWithoutLocationNestedInput
+  stockPositions?: Prisma.StockPositionUpdateManyWithoutLocationNestedInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryUpdateManyWithoutLocationNestedInput
+  requirements?: Prisma.RequirementUpdateManyWithoutLocationNestedInput
+  reservations?: Prisma.ReservationUpdateManyWithoutLocationNestedInput
+  outgoingTransfers?: Prisma.TransferUpdateManyWithoutSourceNestedInput
+  incomingTransfers?: Prisma.TransferUpdateManyWithoutDestinationNestedInput
+  quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
+  assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
+  assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+}
+
+export type LocationUncheckedUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  locationType?: Prisma.StringFieldUpdateOperationsInput | string
+  addressLine?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  postalCode?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutLocationNestedInput
+  policies?: Prisma.LocationItemPolicyUncheckedUpdateManyWithoutLocationNestedInput
+  stockPositions?: Prisma.StockPositionUncheckedUpdateManyWithoutLocationNestedInput
+  ledgerEntries?: Prisma.InventoryLedgerEntryUncheckedUpdateManyWithoutLocationNestedInput
+  requirements?: Prisma.RequirementUncheckedUpdateManyWithoutLocationNestedInput
+  reservations?: Prisma.ReservationUncheckedUpdateManyWithoutLocationNestedInput
+  outgoingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutSourceNestedInput
+  incomingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutDestinationNestedInput
+  quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
+  assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
 }
 
 export type LocationCreateWithoutPoliciesInput = {
@@ -962,6 +1256,8 @@ export type LocationCreateWithoutPoliciesInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutPoliciesInput = {
@@ -986,6 +1282,8 @@ export type LocationUncheckedCreateWithoutPoliciesInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutPoliciesInput = {
@@ -1026,6 +1324,8 @@ export type LocationUpdateWithoutPoliciesInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutPoliciesInput = {
@@ -1050,6 +1350,8 @@ export type LocationUncheckedUpdateWithoutPoliciesInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutLedgerEntriesInput = {
@@ -1074,6 +1376,8 @@ export type LocationCreateWithoutLedgerEntriesInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutLedgerEntriesInput = {
@@ -1098,6 +1402,8 @@ export type LocationUncheckedCreateWithoutLedgerEntriesInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutLedgerEntriesInput = {
@@ -1138,6 +1444,8 @@ export type LocationUpdateWithoutLedgerEntriesInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutLedgerEntriesInput = {
@@ -1162,6 +1470,8 @@ export type LocationUncheckedUpdateWithoutLedgerEntriesInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutStockPositionsInput = {
@@ -1186,6 +1496,8 @@ export type LocationCreateWithoutStockPositionsInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutStockPositionsInput = {
@@ -1210,6 +1522,8 @@ export type LocationUncheckedCreateWithoutStockPositionsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutStockPositionsInput = {
@@ -1250,6 +1564,8 @@ export type LocationUpdateWithoutStockPositionsInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutStockPositionsInput = {
@@ -1274,6 +1590,8 @@ export type LocationUncheckedUpdateWithoutStockPositionsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutRequirementsInput = {
@@ -1298,6 +1616,8 @@ export type LocationCreateWithoutRequirementsInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutRequirementsInput = {
@@ -1322,6 +1642,8 @@ export type LocationUncheckedCreateWithoutRequirementsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutRequirementsInput = {
@@ -1362,6 +1684,8 @@ export type LocationUpdateWithoutRequirementsInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutRequirementsInput = {
@@ -1386,6 +1710,8 @@ export type LocationUncheckedUpdateWithoutRequirementsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutReservationsInput = {
@@ -1410,6 +1736,8 @@ export type LocationCreateWithoutReservationsInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutReservationsInput = {
@@ -1434,6 +1762,8 @@ export type LocationUncheckedCreateWithoutReservationsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutReservationsInput = {
@@ -1474,6 +1804,8 @@ export type LocationUpdateWithoutReservationsInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutReservationsInput = {
@@ -1498,6 +1830,8 @@ export type LocationUncheckedUpdateWithoutReservationsInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutOutgoingTransfersInput = {
@@ -1522,6 +1856,8 @@ export type LocationCreateWithoutOutgoingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutOutgoingTransfersInput = {
@@ -1546,6 +1882,8 @@ export type LocationUncheckedCreateWithoutOutgoingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutOutgoingTransfersInput = {
@@ -1575,6 +1913,8 @@ export type LocationCreateWithoutIncomingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutIncomingTransfersInput = {
@@ -1599,6 +1939,8 @@ export type LocationUncheckedCreateWithoutIncomingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutIncomingTransfersInput = {
@@ -1639,6 +1981,8 @@ export type LocationUpdateWithoutOutgoingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutOutgoingTransfersInput = {
@@ -1663,6 +2007,8 @@ export type LocationUncheckedUpdateWithoutOutgoingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUpsertWithoutIncomingTransfersInput = {
@@ -1698,6 +2044,8 @@ export type LocationUpdateWithoutIncomingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutIncomingTransfersInput = {
@@ -1722,6 +2070,8 @@ export type LocationUncheckedUpdateWithoutIncomingTransfersInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutQuarantineActionsInput = {
@@ -1746,6 +2096,8 @@ export type LocationCreateWithoutQuarantineActionsInput = {
   incomingTransfers?: Prisma.TransferCreateNestedManyWithoutDestinationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutQuarantineActionsInput = {
@@ -1770,6 +2122,8 @@ export type LocationUncheckedCreateWithoutQuarantineActionsInput = {
   incomingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutDestinationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutQuarantineActionsInput = {
@@ -1810,6 +2164,8 @@ export type LocationUpdateWithoutQuarantineActionsInput = {
   incomingTransfers?: Prisma.TransferUpdateManyWithoutDestinationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutQuarantineActionsInput = {
@@ -1834,6 +2190,8 @@ export type LocationUncheckedUpdateWithoutQuarantineActionsInput = {
   incomingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutDestinationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutAssetsInput = {
@@ -1858,6 +2216,8 @@ export type LocationCreateWithoutAssetsInput = {
   incomingTransfers?: Prisma.TransferCreateNestedManyWithoutDestinationInput
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutAssetsInput = {
@@ -1882,6 +2242,8 @@ export type LocationUncheckedCreateWithoutAssetsInput = {
   incomingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutDestinationInput
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutAssetsInput = {
@@ -1922,6 +2284,8 @@ export type LocationUpdateWithoutAssetsInput = {
   incomingTransfers?: Prisma.TransferUpdateManyWithoutDestinationNestedInput
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutAssetsInput = {
@@ -1946,6 +2310,8 @@ export type LocationUncheckedUpdateWithoutAssetsInput = {
   incomingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutDestinationNestedInput
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateWithoutAssetAllocationsInput = {
@@ -1970,6 +2336,8 @@ export type LocationCreateWithoutAssetAllocationsInput = {
   incomingTransfers?: Prisma.TransferCreateNestedManyWithoutDestinationInput
   quarantineActions?: Prisma.QuarantineActionCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutLocationInput
 }
 
 export type LocationUncheckedCreateWithoutAssetAllocationsInput = {
@@ -1994,6 +2362,8 @@ export type LocationUncheckedCreateWithoutAssetAllocationsInput = {
   incomingTransfers?: Prisma.TransferUncheckedCreateNestedManyWithoutDestinationInput
   quarantineActions?: Prisma.QuarantineActionUncheckedCreateNestedManyWithoutLocationInput
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutLocationInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedCreateNestedManyWithoutHomeLocationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutLocationInput
 }
 
 export type LocationCreateOrConnectWithoutAssetAllocationsInput = {
@@ -2034,6 +2404,8 @@ export type LocationUpdateWithoutAssetAllocationsInput = {
   incomingTransfers?: Prisma.TransferUpdateManyWithoutDestinationNestedInput
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutAssetAllocationsInput = {
@@ -2058,6 +2430,8 @@ export type LocationUncheckedUpdateWithoutAssetAllocationsInput = {
   incomingTransfers?: Prisma.TransferUncheckedUpdateManyWithoutDestinationNestedInput
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationCreateManyOrganizationInput = {
@@ -2095,6 +2469,8 @@ export type LocationUpdateWithoutOrganizationInput = {
   quarantineActions?: Prisma.QuarantineActionUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateWithoutOrganizationInput = {
@@ -2119,6 +2495,8 @@ export type LocationUncheckedUpdateWithoutOrganizationInput = {
   quarantineActions?: Prisma.QuarantineActionUncheckedUpdateManyWithoutLocationNestedInput
   assets?: Prisma.AssetUncheckedUpdateManyWithoutLocationNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutLocationNestedInput
+  homeStaffProfiles?: Prisma.StaffProfileUncheckedUpdateManyWithoutHomeLocationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutLocationNestedInput
 }
 
 export type LocationUncheckedUpdateManyWithoutOrganizationInput = {
@@ -2151,6 +2529,8 @@ export type LocationCountOutputType = {
   quarantineActions: number
   assets: number
   assetAllocations: number
+  homeStaffProfiles: number
+  shifts: number
 }
 
 export type LocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2165,6 +2545,8 @@ export type LocationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   quarantineActions?: boolean | LocationCountOutputTypeCountQuarantineActionsArgs
   assets?: boolean | LocationCountOutputTypeCountAssetsArgs
   assetAllocations?: boolean | LocationCountOutputTypeCountAssetAllocationsArgs
+  homeStaffProfiles?: boolean | LocationCountOutputTypeCountHomeStaffProfilesArgs
+  shifts?: boolean | LocationCountOutputTypeCountShiftsArgs
 }
 
 /**
@@ -2254,6 +2636,20 @@ export type LocationCountOutputTypeCountAssetAllocationsArgs<ExtArgs extends run
   where?: Prisma.AssetAllocationWhereInput
 }
 
+/**
+ * LocationCountOutputType without action
+ */
+export type LocationCountOutputTypeCountHomeStaffProfilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffProfileWhereInput
+}
+
+/**
+ * LocationCountOutputType without action
+ */
+export type LocationCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftWhereInput
+}
+
 
 export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2279,6 +2675,8 @@ export type LocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   quarantineActions?: boolean | Prisma.Location$quarantineActionsArgs<ExtArgs>
   assets?: boolean | Prisma.Location$assetsArgs<ExtArgs>
   assetAllocations?: boolean | Prisma.Location$assetAllocationsArgs<ExtArgs>
+  homeStaffProfiles?: boolean | Prisma.Location$homeStaffProfilesArgs<ExtArgs>
+  shifts?: boolean | Prisma.Location$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["location"]>
 
@@ -2340,6 +2738,8 @@ export type LocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   quarantineActions?: boolean | Prisma.Location$quarantineActionsArgs<ExtArgs>
   assets?: boolean | Prisma.Location$assetsArgs<ExtArgs>
   assetAllocations?: boolean | Prisma.Location$assetAllocationsArgs<ExtArgs>
+  homeStaffProfiles?: boolean | Prisma.Location$homeStaffProfilesArgs<ExtArgs>
+  shifts?: boolean | Prisma.Location$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.LocationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LocationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2364,6 +2764,8 @@ export type $LocationPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     quarantineActions: Prisma.$QuarantineActionPayload<ExtArgs>[]
     assets: Prisma.$AssetPayload<ExtArgs>[]
     assetAllocations: Prisma.$AssetAllocationPayload<ExtArgs>[]
+    homeStaffProfiles: Prisma.$StaffProfilePayload<ExtArgs>[]
+    shifts: Prisma.$ShiftPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2783,6 +3185,8 @@ export interface Prisma__LocationClient<T, Null = never, ExtArgs extends runtime
   quarantineActions<T extends Prisma.Location$quarantineActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$quarantineActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuarantineActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assets<T extends Prisma.Location$assetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assetAllocations<T extends Prisma.Location$assetAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$assetAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssetAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  homeStaffProfiles<T extends Prisma.Location$homeStaffProfilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$homeStaffProfilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shifts<T extends Prisma.Location$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Location$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3483,6 +3887,54 @@ export type Location$assetAllocationsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.AssetAllocationScalarFieldEnum | Prisma.AssetAllocationScalarFieldEnum[]
+}
+
+/**
+ * Location.homeStaffProfiles
+ */
+export type Location$homeStaffProfilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffProfile
+   */
+  select?: Prisma.StaffProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffProfile
+   */
+  omit?: Prisma.StaffProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffProfileInclude<ExtArgs> | null
+  where?: Prisma.StaffProfileWhereInput
+  orderBy?: Prisma.StaffProfileOrderByWithRelationInput | Prisma.StaffProfileOrderByWithRelationInput[]
+  cursor?: Prisma.StaffProfileWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffProfileScalarFieldEnum | Prisma.StaffProfileScalarFieldEnum[]
+}
+
+/**
+ * Location.shifts
+ */
+export type Location$shiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Shift
+   */
+  select?: Prisma.ShiftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Shift
+   */
+  omit?: Prisma.ShiftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShiftInclude<ExtArgs> | null
+  where?: Prisma.ShiftWhereInput
+  orderBy?: Prisma.ShiftOrderByWithRelationInput | Prisma.ShiftOrderByWithRelationInput[]
+  cursor?: Prisma.ShiftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
 }
 
 /**

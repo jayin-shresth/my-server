@@ -49,6 +49,9 @@ coverage/
 # Uploads
 uploads/
 
+# Local deployment archives
+*.zip
+
 # TypeScript cache
 *.tsbuildinfo
 
@@ -62,3 +65,4 @@ uploads/
 *.pem
 *.key
 tokens.json
+.nitrostudio/

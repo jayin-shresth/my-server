@@ -43,6 +43,31 @@ export type User = Prisma.UserModel
  */
 export type UserAssignment = Prisma.UserAssignmentModel
 /**
+ * Model StaffProfile
+ * 
+ */
+export type StaffProfile = Prisma.StaffProfileModel
+/**
+ * Model StaffSkill
+ * 
+ */
+export type StaffSkill = Prisma.StaffSkillModel
+/**
+ * Model Shift
+ * 
+ */
+export type Shift = Prisma.ShiftModel
+/**
+ * Model ShiftAssignment
+ * 
+ */
+export type ShiftAssignment = Prisma.ShiftAssignmentModel
+/**
+ * Model StaffUnavailability
+ * 
+ */
+export type StaffUnavailability = Prisma.StaffUnavailabilityModel
+/**
  * Model ItemCategory
  * 
  */
@@ -212,6 +237,11 @@ export type WorkflowRun = Prisma.WorkflowRunModel
  * 
  */
 export type PreparedAction = Prisma.PreparedActionModel
+/**
+ * Model NotificationDelivery
+ * 
+ */
+export type NotificationDelivery = Prisma.NotificationDeliveryModel
 /**
  * Model ApprovalRequest
  * 

@@ -1,5 +1,6 @@
 import { McpApp, Module, ConfigModule } from '@nitrostack/core';
-import { CalculatorModule } from './modules/calculator/calculator.module.js';
+import { OrchestratorModule } from './modules/orchestrator/orchestrator.module.js';
+import { WorkforceModule } from './modules/workforce/workforce.module.js';
 import { SystemHealthCheck } from './health/system.health.js';
 
 /**
@@ -11,7 +12,7 @@ import { SystemHealthCheck } from './health/system.health.js';
 @McpApp({
   module: AppModule,
   server: {
-    name: 'calculator-server',
+    name: 'careflow-logistics',
     version: '1.0.0'
   },
   logging: {
@@ -23,7 +24,8 @@ import { SystemHealthCheck } from './health/system.health.js';
   description: 'Root application module',
   imports: [
     ConfigModule.forRoot(),
-    CalculatorModule
+    OrchestratorModule,
+    WorkforceModule
   ],
   providers: [
     // Health Checks

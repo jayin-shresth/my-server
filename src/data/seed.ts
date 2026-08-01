@@ -4,9 +4,11 @@ import { seedCore } from "./seed/core.js";
 import { seedInventory } from "./seed/inventory.js";
 import { seedScenarios } from "./seed/scenarios.js";
 import { seedSuppliers } from "./seed/suppliers.js";
+import { seedWorkforce } from "./seed/workforce.js";
 
 async function main(): Promise<void> {
   const core = await seedCore(prisma);
+  const workforce = await seedWorkforce(prisma, core);
   const catalog = await seedCatalog(prisma, core);
   const suppliers = await seedSuppliers(prisma, catalog);
   const inventory = await seedInventory(prisma, core, catalog);
@@ -22,6 +24,11 @@ async function main(): Promise<void> {
     prisma.inventoryLedgerEntry.count(),
     prisma.stockPosition.count(),
     prisma.asset.count(),
+    prisma.role.count({ where: { organizationId: core.organizationId } }),
+    prisma.staffProfile.count(),
+    prisma.shift.count(),
+    prisma.shiftAssignment.count(),
+    prisma.notificationDelivery.count(),
   ]);
 
   console.log(
@@ -40,6 +47,16 @@ async function main(): Promise<void> {
           ledgerEntries: counts[6],
           stockPositions: counts[7],
           assets: counts[8],
+          roles: counts[9],
+          staffProfiles: counts[10],
+          workforceShifts: counts[11],
+          shiftAssignments: counts[12],
+          notificationDeliveries: counts[13],
+        },
+        workforce: {
+          publishedShifts: workforce.publishedShiftIds.length,
+          planningShifts: workforce.planningShiftIds.length,
+          declaredAssignments: workforce.assignmentCount,
         },
       },
       null,

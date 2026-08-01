@@ -19,6 +19,14 @@ export interface InventorySeedResult {
   ledgerEntryCount: number;
 }
 
+export interface WorkforceSeedResult {
+  staffProfileIds: readonly string[];
+  publishedShiftIds: readonly string[];
+  planningShiftIds: readonly string[];
+  assignmentCount: number;
+  notificationDeliveryIds: readonly string[];
+}
+
 export interface ScenarioSeedResult {
   requirementId: string;
   rfqId: string;

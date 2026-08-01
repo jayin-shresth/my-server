@@ -206,6 +206,7 @@ export type OrganizationWhereInput = {
   suppliers?: Prisma.SupplierListRelationFilter
   workflows?: Prisma.WorkflowRunListRelationFilter
   auditEvents?: Prisma.AuditEventListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }
 
 export type OrganizationOrderByWithRelationInput = {
@@ -224,6 +225,7 @@ export type OrganizationOrderByWithRelationInput = {
   suppliers?: Prisma.SupplierOrderByRelationAggregateInput
   workflows?: Prisma.WorkflowRunOrderByRelationAggregateInput
   auditEvents?: Prisma.AuditEventOrderByRelationAggregateInput
+  shifts?: Prisma.ShiftOrderByRelationAggregateInput
 }
 
 export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +247,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   suppliers?: Prisma.SupplierListRelationFilter
   workflows?: Prisma.WorkflowRunListRelationFilter
   auditEvents?: Prisma.AuditEventListRelationFilter
+  shifts?: Prisma.ShiftListRelationFilter
 }, "id" | "code">
 
 export type OrganizationOrderByWithAggregationInput = {
@@ -289,6 +292,7 @@ export type OrganizationCreateInput = {
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateInput = {
@@ -307,6 +311,7 @@ export type OrganizationUncheckedCreateInput = {
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUpdateInput = {
@@ -325,6 +330,7 @@ export type OrganizationUpdateInput = {
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateInput = {
@@ -343,6 +349,7 @@ export type OrganizationUncheckedUpdateInput = {
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateManyInput = {
@@ -460,6 +467,20 @@ export type OrganizationUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutUsersInput, Prisma.OrganizationUpdateWithoutUsersInput>, Prisma.OrganizationUncheckedUpdateWithoutUsersInput>
 }
 
+export type OrganizationCreateNestedOneWithoutShiftsInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutShiftsInput, Prisma.OrganizationUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutShiftsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+}
+
+export type OrganizationUpdateOneRequiredWithoutShiftsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrganizationCreateWithoutShiftsInput, Prisma.OrganizationUncheckedCreateWithoutShiftsInput>
+  connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutShiftsInput
+  upsert?: Prisma.OrganizationUpsertWithoutShiftsInput
+  connect?: Prisma.OrganizationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrganizationUpdateToOneWithWhereWithoutShiftsInput, Prisma.OrganizationUpdateWithoutShiftsInput>, Prisma.OrganizationUncheckedUpdateWithoutShiftsInput>
+}
+
 export type OrganizationCreateNestedOneWithoutCategoriesInput = {
   create?: Prisma.XOR<Prisma.OrganizationCreateWithoutCategoriesInput, Prisma.OrganizationUncheckedCreateWithoutCategoriesInput>
   connectOrCreate?: Prisma.OrganizationCreateOrConnectWithoutCategoriesInput
@@ -545,6 +566,7 @@ export type OrganizationCreateWithoutLocationsInput = {
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutLocationsInput = {
@@ -562,6 +584,7 @@ export type OrganizationUncheckedCreateWithoutLocationsInput = {
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutLocationsInput = {
@@ -595,6 +618,7 @@ export type OrganizationUpdateWithoutLocationsInput = {
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutLocationsInput = {
@@ -612,6 +636,7 @@ export type OrganizationUncheckedUpdateWithoutLocationsInput = {
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutRolesInput = {
@@ -629,6 +654,7 @@ export type OrganizationCreateWithoutRolesInput = {
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutRolesInput = {
@@ -646,6 +672,7 @@ export type OrganizationUncheckedCreateWithoutRolesInput = {
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutRolesInput = {
@@ -679,6 +706,7 @@ export type OrganizationUpdateWithoutRolesInput = {
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutRolesInput = {
@@ -696,6 +724,7 @@ export type OrganizationUncheckedUpdateWithoutRolesInput = {
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutUsersInput = {
@@ -713,6 +742,7 @@ export type OrganizationCreateWithoutUsersInput = {
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -730,6 +760,7 @@ export type OrganizationUncheckedCreateWithoutUsersInput = {
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -763,6 +794,7 @@ export type OrganizationUpdateWithoutUsersInput = {
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -775,6 +807,95 @@ export type OrganizationUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
   roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  categories?: Prisma.ItemCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
+  items?: Prisma.CatalogItemUncheckedUpdateManyWithoutOrganizationNestedInput
+  suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
+  workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationCreateWithoutShiftsInput = {
+  id: string
+  code: string
+  name: string
+  legalName: string
+  timezone: string
+  currency: string
+  createdAt: Date | string
+  locations?: Prisma.LocationCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleCreateNestedManyWithoutOrganizationInput
+  users?: Prisma.UserCreateNestedManyWithoutOrganizationInput
+  categories?: Prisma.ItemCategoryCreateNestedManyWithoutOrganizationInput
+  items?: Prisma.CatalogItemCreateNestedManyWithoutOrganizationInput
+  suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
+  workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationUncheckedCreateWithoutShiftsInput = {
+  id: string
+  code: string
+  name: string
+  legalName: string
+  timezone: string
+  currency: string
+  createdAt: Date | string
+  locations?: Prisma.LocationUncheckedCreateNestedManyWithoutOrganizationInput
+  roles?: Prisma.RoleUncheckedCreateNestedManyWithoutOrganizationInput
+  users?: Prisma.UserUncheckedCreateNestedManyWithoutOrganizationInput
+  categories?: Prisma.ItemCategoryUncheckedCreateNestedManyWithoutOrganizationInput
+  items?: Prisma.CatalogItemUncheckedCreateNestedManyWithoutOrganizationInput
+  suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
+  workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
+  auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+}
+
+export type OrganizationCreateOrConnectWithoutShiftsInput = {
+  where: Prisma.OrganizationWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutShiftsInput, Prisma.OrganizationUncheckedCreateWithoutShiftsInput>
+}
+
+export type OrganizationUpsertWithoutShiftsInput = {
+  update: Prisma.XOR<Prisma.OrganizationUpdateWithoutShiftsInput, Prisma.OrganizationUncheckedUpdateWithoutShiftsInput>
+  create: Prisma.XOR<Prisma.OrganizationCreateWithoutShiftsInput, Prisma.OrganizationUncheckedCreateWithoutShiftsInput>
+  where?: Prisma.OrganizationWhereInput
+}
+
+export type OrganizationUpdateToOneWithWhereWithoutShiftsInput = {
+  where?: Prisma.OrganizationWhereInput
+  data: Prisma.XOR<Prisma.OrganizationUpdateWithoutShiftsInput, Prisma.OrganizationUncheckedUpdateWithoutShiftsInput>
+}
+
+export type OrganizationUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUpdateManyWithoutOrganizationNestedInput
+  users?: Prisma.UserUpdateManyWithoutOrganizationNestedInput
+  categories?: Prisma.ItemCategoryUpdateManyWithoutOrganizationNestedInput
+  items?: Prisma.CatalogItemUpdateManyWithoutOrganizationNestedInput
+  suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
+  workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
+  auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+}
+
+export type OrganizationUncheckedUpdateWithoutShiftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  legalName?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  locations?: Prisma.LocationUncheckedUpdateManyWithoutOrganizationNestedInput
+  roles?: Prisma.RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+  users?: Prisma.UserUncheckedUpdateManyWithoutOrganizationNestedInput
   categories?: Prisma.ItemCategoryUncheckedUpdateManyWithoutOrganizationNestedInput
   items?: Prisma.CatalogItemUncheckedUpdateManyWithoutOrganizationNestedInput
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -797,6 +918,7 @@ export type OrganizationCreateWithoutCategoriesInput = {
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutCategoriesInput = {
@@ -814,6 +936,7 @@ export type OrganizationUncheckedCreateWithoutCategoriesInput = {
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutCategoriesInput = {
@@ -847,6 +970,7 @@ export type OrganizationUpdateWithoutCategoriesInput = {
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutCategoriesInput = {
@@ -864,6 +988,7 @@ export type OrganizationUncheckedUpdateWithoutCategoriesInput = {
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutItemsInput = {
@@ -881,6 +1006,7 @@ export type OrganizationCreateWithoutItemsInput = {
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutItemsInput = {
@@ -898,6 +1024,7 @@ export type OrganizationUncheckedCreateWithoutItemsInput = {
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutItemsInput = {
@@ -931,6 +1058,7 @@ export type OrganizationUpdateWithoutItemsInput = {
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutItemsInput = {
@@ -948,6 +1076,7 @@ export type OrganizationUncheckedUpdateWithoutItemsInput = {
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutSuppliersInput = {
@@ -965,6 +1094,7 @@ export type OrganizationCreateWithoutSuppliersInput = {
   items?: Prisma.CatalogItemCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutSuppliersInput = {
@@ -982,6 +1112,7 @@ export type OrganizationUncheckedCreateWithoutSuppliersInput = {
   items?: Prisma.CatalogItemUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutSuppliersInput = {
@@ -1015,6 +1146,7 @@ export type OrganizationUpdateWithoutSuppliersInput = {
   items?: Prisma.CatalogItemUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutSuppliersInput = {
@@ -1032,6 +1164,7 @@ export type OrganizationUncheckedUpdateWithoutSuppliersInput = {
   items?: Prisma.CatalogItemUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutWorkflowsInput = {
@@ -1049,6 +1182,7 @@ export type OrganizationCreateWithoutWorkflowsInput = {
   items?: Prisma.CatalogItemCreateNestedManyWithoutOrganizationInput
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutWorkflowsInput = {
@@ -1066,6 +1200,7 @@ export type OrganizationUncheckedCreateWithoutWorkflowsInput = {
   items?: Prisma.CatalogItemUncheckedCreateNestedManyWithoutOrganizationInput
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   auditEvents?: Prisma.AuditEventUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutWorkflowsInput = {
@@ -1099,6 +1234,7 @@ export type OrganizationUpdateWithoutWorkflowsInput = {
   items?: Prisma.CatalogItemUpdateManyWithoutOrganizationNestedInput
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutWorkflowsInput = {
@@ -1116,6 +1252,7 @@ export type OrganizationUncheckedUpdateWithoutWorkflowsInput = {
   items?: Prisma.CatalogItemUncheckedUpdateManyWithoutOrganizationNestedInput
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   auditEvents?: Prisma.AuditEventUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationCreateWithoutAuditEventsInput = {
@@ -1133,6 +1270,7 @@ export type OrganizationCreateWithoutAuditEventsInput = {
   items?: Prisma.CatalogItemCreateNestedManyWithoutOrganizationInput
   suppliers?: Prisma.SupplierCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
@@ -1150,6 +1288,7 @@ export type OrganizationUncheckedCreateWithoutAuditEventsInput = {
   items?: Prisma.CatalogItemUncheckedCreateNestedManyWithoutOrganizationInput
   suppliers?: Prisma.SupplierUncheckedCreateNestedManyWithoutOrganizationInput
   workflows?: Prisma.WorkflowRunUncheckedCreateNestedManyWithoutOrganizationInput
+  shifts?: Prisma.ShiftUncheckedCreateNestedManyWithoutOrganizationInput
 }
 
 export type OrganizationCreateOrConnectWithoutAuditEventsInput = {
@@ -1183,6 +1322,7 @@ export type OrganizationUpdateWithoutAuditEventsInput = {
   items?: Prisma.CatalogItemUpdateManyWithoutOrganizationNestedInput
   suppliers?: Prisma.SupplierUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUpdateManyWithoutOrganizationNestedInput
 }
 
 export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
@@ -1200,6 +1340,7 @@ export type OrganizationUncheckedUpdateWithoutAuditEventsInput = {
   items?: Prisma.CatalogItemUncheckedUpdateManyWithoutOrganizationNestedInput
   suppliers?: Prisma.SupplierUncheckedUpdateManyWithoutOrganizationNestedInput
   workflows?: Prisma.WorkflowRunUncheckedUpdateManyWithoutOrganizationNestedInput
+  shifts?: Prisma.ShiftUncheckedUpdateManyWithoutOrganizationNestedInput
 }
 
 
@@ -1216,6 +1357,7 @@ export type OrganizationCountOutputType = {
   suppliers: number
   workflows: number
   auditEvents: number
+  shifts: number
 }
 
 export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1227,6 +1369,7 @@ export type OrganizationCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   suppliers?: boolean | OrganizationCountOutputTypeCountSuppliersArgs
   workflows?: boolean | OrganizationCountOutputTypeCountWorkflowsArgs
   auditEvents?: boolean | OrganizationCountOutputTypeCountAuditEventsArgs
+  shifts?: boolean | OrganizationCountOutputTypeCountShiftsArgs
 }
 
 /**
@@ -1295,6 +1438,13 @@ export type OrganizationCountOutputTypeCountAuditEventsArgs<ExtArgs extends runt
   where?: Prisma.AuditEventWhereInput
 }
 
+/**
+ * OrganizationCountOutputType without action
+ */
+export type OrganizationCountOutputTypeCountShiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShiftWhereInput
+}
+
 
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1312,6 +1462,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   suppliers?: boolean | Prisma.Organization$suppliersArgs<ExtArgs>
   workflows?: boolean | Prisma.Organization$workflowsArgs<ExtArgs>
   auditEvents?: boolean | Prisma.Organization$auditEventsArgs<ExtArgs>
+  shifts?: boolean | Prisma.Organization$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
 
@@ -1355,6 +1506,7 @@ export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.Interna
   suppliers?: boolean | Prisma.Organization$suppliersArgs<ExtArgs>
   workflows?: boolean | Prisma.Organization$workflowsArgs<ExtArgs>
   auditEvents?: boolean | Prisma.Organization$auditEventsArgs<ExtArgs>
+  shifts?: boolean | Prisma.Organization$shiftsArgs<ExtArgs>
   _count?: boolean | Prisma.OrganizationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1371,6 +1523,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     suppliers: Prisma.$SupplierPayload<ExtArgs>[]
     workflows: Prisma.$WorkflowRunPayload<ExtArgs>[]
     auditEvents: Prisma.$AuditEventPayload<ExtArgs>[]
+    shifts: Prisma.$ShiftPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1782,6 +1935,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
   suppliers<T extends Prisma.Organization$suppliersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$suppliersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   workflows<T extends Prisma.Organization$workflowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$workflowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WorkflowRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditEvents<T extends Prisma.Organization$auditEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$auditEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shifts<T extends Prisma.Organization$shiftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Organization$shiftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShiftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2398,6 +2552,30 @@ export type Organization$auditEventsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.AuditEventScalarFieldEnum | Prisma.AuditEventScalarFieldEnum[]
+}
+
+/**
+ * Organization.shifts
+ */
+export type Organization$shiftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Shift
+   */
+  select?: Prisma.ShiftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Shift
+   */
+  omit?: Prisma.ShiftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShiftInclude<ExtArgs> | null
+  where?: Prisma.ShiftWhereInput
+  orderBy?: Prisma.ShiftOrderByWithRelationInput | Prisma.ShiftOrderByWithRelationInput[]
+  cursor?: Prisma.ShiftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShiftScalarFieldEnum | Prisma.ShiftScalarFieldEnum[]
 }
 
 /**

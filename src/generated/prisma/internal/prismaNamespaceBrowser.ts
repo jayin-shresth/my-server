@@ -56,6 +56,11 @@ export const ModelName = {
   Role: 'Role',
   User: 'User',
   UserAssignment: 'UserAssignment',
+  StaffProfile: 'StaffProfile',
+  StaffSkill: 'StaffSkill',
+  Shift: 'Shift',
+  ShiftAssignment: 'ShiftAssignment',
+  StaffUnavailability: 'StaffUnavailability',
   ItemCategory: 'ItemCategory',
   CatalogItem: 'CatalogItem',
   LocationItemPolicy: 'LocationItemPolicy',
@@ -90,6 +95,7 @@ export const ModelName = {
   ApprovalPolicy: 'ApprovalPolicy',
   WorkflowRun: 'WorkflowRun',
   PreparedAction: 'PreparedAction',
+  NotificationDelivery: 'NotificationDelivery',
   ApprovalRequest: 'ApprovalRequest',
   ApprovalDecision: 'ApprovalDecision',
   ActionExecution: 'ActionExecution',
@@ -172,6 +178,91 @@ export const UserAssignmentScalarFieldEnum = {
 } as const
 
 export type UserAssignmentScalarFieldEnum = (typeof UserAssignmentScalarFieldEnum)[keyof typeof UserAssignmentScalarFieldEnum]
+
+
+export const StaffProfileScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  homeLocationId: 'homeLocationId',
+  staffType: 'staffType',
+  employmentStatus: 'employmentStatus',
+  contractMinutesPerWeek: 'contractMinutesPerWeek',
+  maxMinutesPerWeek: 'maxMinutesPerWeek',
+  minRestMinutes: 'minRestMinutes',
+  maxConsecutiveShifts: 'maxConsecutiveShifts',
+  maxConsecutiveNightShifts: 'maxConsecutiveNightShifts',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StaffProfileScalarFieldEnum = (typeof StaffProfileScalarFieldEnum)[keyof typeof StaffProfileScalarFieldEnum]
+
+
+export const StaffSkillScalarFieldEnum = {
+  id: 'id',
+  staffProfileId: 'staffProfileId',
+  skillCode: 'skillCode',
+  proficiencyLevel: 'proficiencyLevel',
+  validFrom: 'validFrom',
+  validUntil: 'validUntil',
+  active: 'active'
+} as const
+
+export type StaffSkillScalarFieldEnum = (typeof StaffSkillScalarFieldEnum)[keyof typeof StaffSkillScalarFieldEnum]
+
+
+export const ShiftScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  organizationId: 'organizationId',
+  locationId: 'locationId',
+  rosterWeekStart: 'rosterWeekStart',
+  shiftType: 'shiftType',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  requiredStaffType: 'requiredStaffType',
+  requiredSkillCode: 'requiredSkillCode',
+  requiredHeadcount: 'requiredHeadcount',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ShiftScalarFieldEnum = (typeof ShiftScalarFieldEnum)[keyof typeof ShiftScalarFieldEnum]
+
+
+export const ShiftAssignmentScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  shiftId: 'shiftId',
+  staffProfileId: 'staffProfileId',
+  preparedActionId: 'preparedActionId',
+  status: 'status',
+  source: 'source',
+  assignedAt: 'assignedAt',
+  assignedByType: 'assignedByType',
+  assignedById: 'assignedById',
+  notes: 'notes'
+} as const
+
+export type ShiftAssignmentScalarFieldEnum = (typeof ShiftAssignmentScalarFieldEnum)[keyof typeof ShiftAssignmentScalarFieldEnum]
+
+
+export const StaffUnavailabilityScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  staffProfileId: 'staffProfileId',
+  approvedByUserId: 'approvedByUserId',
+  unavailabilityType: 'unavailabilityType',
+  status: 'status',
+  startsAt: 'startsAt',
+  endsAt: 'endsAt',
+  reason: 'reason',
+  recordedAt: 'recordedAt'
+} as const
+
+export type StaffUnavailabilityScalarFieldEnum = (typeof StaffUnavailabilityScalarFieldEnum)[keyof typeof StaffUnavailabilityScalarFieldEnum]
 
 
 export const ItemCategoryScalarFieldEnum = {
@@ -676,6 +767,27 @@ export const PreparedActionScalarFieldEnum = {
 } as const
 
 export type PreparedActionScalarFieldEnum = (typeof PreparedActionScalarFieldEnum)[keyof typeof PreparedActionScalarFieldEnum]
+
+
+export const NotificationDeliveryScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  preparedActionId: 'preparedActionId',
+  idempotencyKey: 'idempotencyKey',
+  channel: 'channel',
+  purpose: 'purpose',
+  recipientMasked: 'recipientMasked',
+  recipientHash: 'recipientHash',
+  status: 'status',
+  providerMessageId: 'providerMessageId',
+  attemptCount: 'attemptCount',
+  requestedAt: 'requestedAt',
+  sentAt: 'sentAt',
+  failedAt: 'failedAt',
+  lastError: 'lastError'
+} as const
+
+export type NotificationDeliveryScalarFieldEnum = (typeof NotificationDeliveryScalarFieldEnum)[keyof typeof NotificationDeliveryScalarFieldEnum]
 
 
 export const ApprovalRequestScalarFieldEnum = {

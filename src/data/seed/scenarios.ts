@@ -443,11 +443,11 @@ async function seedWorkflows(client: PrismaClient): Promise<void> {
   }
 
   const actions = [
-    { id: "action-po", workflowRunId: "workflow-po", actionType: "CREATE_PURCHASE_ORDER", requesterType: "AGENT", requesterId: "careflow-procurement-agent", status: "EXECUTED", amountPaise: 183_120, targetType: "QUOTE", targetId: "quote-icu-02", policyId: "policy-purchase-low", requestStatus: "APPROVED", approver: "user-03", decision: "APPROVED", executionStatus: "SUCCEEDED", resultType: "PURCHASE_ORDER", resultId: "po-icu-001", error: null },
+    { id: "action-po", workflowRunId: "workflow-po", actionType: "CREATE_PURCHASE_ORDER", requesterType: "AGENT", requesterId: "careflow-procurement-agent", status: "EXECUTED", amountPaise: 183_120, targetType: "QUOTE", targetId: "quote-icu-02", policyId: "policy-purchase-low", requestStatus: "APPROVED", approver: "user-15", decision: "APPROVED", executionStatus: "SUCCEEDED", resultType: "PURCHASE_ORDER", resultId: "po-icu-001", error: null },
     { id: "action-transfer", workflowRunId: "workflow-transfer", actionType: "APPROVE_TRANSFER", requesterType: "AGENT", requesterId: "careflow-redistribution-agent", status: "PENDING_APPROVAL", amountPaise: null, targetType: "REQUIREMENT", targetId: "requirement-icu-001", policyId: "policy-transfer", requestStatus: "PENDING", approver: null, decision: null, executionStatus: null, resultType: null, resultId: null, error: null },
-    { id: "action-quarantine", workflowRunId: "workflow-quarantine", actionType: "QUARANTINE_STOCK", requesterType: "SYSTEM", requesterId: "recall-monitor", status: "REJECTED", amountPaise: null, targetType: "STOCK_BATCH", targetId: "batch-recall-b", policyId: "policy-quarantine", requestStatus: "REJECTED", approver: "user-05", decision: "REJECTED", executionStatus: null, resultType: null, resultId: null, error: null },
-    { id: "action-asset", workflowRunId: "workflow-asset", actionType: "ALLOCATE_ASSET", requesterType: "USER", requesterId: "user-06", status: "EXECUTION_FAILED", amountPaise: null, targetType: "ASSET", targetId: "asset-031", policyId: "policy-asset", requestStatus: "APPROVED", approver: "user-06", decision: "APPROVED", executionStatus: "FAILED", resultType: null, resultId: null, error: "Asset blocked because preventive maintenance is overdue" },
-    { id: "action-receiving-po", workflowRunId: "workflow-receiving-po", actionType: "CREATE_PURCHASE_ORDER", requesterType: "USER", requesterId: "user-03", status: "EXECUTED", amountPaise: 280_000, targetType: "PROCUREMENT_CASE", targetId: "receiving-demo-procurement", policyId: "policy-purchase-low", requestStatus: "APPROVED", approver: "user-03", decision: "APPROVED", executionStatus: "SUCCEEDED", resultType: "PURCHASE_ORDER", resultId: "po-receiving-001", error: null },
+    { id: "action-quarantine", workflowRunId: "workflow-quarantine", actionType: "QUARANTINE_STOCK", requesterType: "SYSTEM", requesterId: "recall-monitor", status: "REJECTED", amountPaise: null, targetType: "STOCK_BATCH", targetId: "batch-recall-b", policyId: "policy-quarantine", requestStatus: "REJECTED", approver: "user-11", decision: "REJECTED", executionStatus: null, resultType: null, resultId: null, error: null },
+    { id: "action-asset", workflowRunId: "workflow-asset", actionType: "ALLOCATE_ASSET", requesterType: "USER", requesterId: "user-12", status: "EXECUTION_FAILED", amountPaise: null, targetType: "ASSET", targetId: "asset-031", policyId: "policy-asset", requestStatus: "APPROVED", approver: "user-12", decision: "APPROVED", executionStatus: "FAILED", resultType: null, resultId: null, error: "Asset blocked because preventive maintenance is overdue" },
+    { id: "action-receiving-po", workflowRunId: "workflow-receiving-po", actionType: "CREATE_PURCHASE_ORDER", requesterType: "USER", requesterId: "user-15", status: "EXECUTED", amountPaise: 280_000, targetType: "PROCUREMENT_CASE", targetId: "receiving-demo-procurement", policyId: "policy-purchase-low", requestStatus: "APPROVED", approver: "user-15", decision: "APPROVED", executionStatus: "SUCCEEDED", resultType: "PURCHASE_ORDER", resultId: "po-receiving-001", error: null },
   ] as const;
   for (const action of actions) {
     await client.preparedAction.upsert({
@@ -480,7 +480,7 @@ async function seedWorkflows(client: PrismaClient): Promise<void> {
       await client.approvalDecision.upsert({
         where: { id: `decision-${action.id}` },
         create: { id: `decision-${action.id}`, approvalRequestId, approverUserId: action.approver, decision: action.decision, rationale: action.decision === "APPROVED" ? "Evidence and policy checks satisfied" : "Investigation evidence insufficient for requested disposition", decidedAt: at(-2, 5) },
-        update: { decision: action.decision },
+        update: { approverUserId: action.approver, decision: action.decision },
       });
     }
     if (action.executionStatus !== null) {

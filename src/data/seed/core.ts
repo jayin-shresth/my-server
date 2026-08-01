@@ -24,6 +24,31 @@ const roles = [
   ["role-04", "FINANCE_APPROVER", "Finance Approver", 5_000_000],
   ["role-05", "COMPLIANCE_OFFICER", "Compliance Officer", 1_000_000],
   ["role-06", "OPERATIONS_ADMIN", "Operations Administrator", 10_000_000],
+  ["role-07", "CLINICAL_STAFF", "Clinical Staff", 0],
+] as const;
+
+const displayNames = [
+  "Asha Nair",
+  "Meera Kulkarni",
+  "Kavya Rao",
+  "Neha Iyer",
+  "Riya Menon",
+  "Ananya Shah",
+  "Priya Deshmukh",
+  "Saanvi Joshi",
+  "Diya Kapoor",
+  "Arjun Malhotra",
+  "Nandita Bose",
+  "Vikram Shetty",
+  "Rahul Patil",
+  "Isha Banerjee",
+  "Karan Mehta",
+] as const;
+
+const userRoleIds = [
+  "role-07", "role-07", "role-07", "role-07", "role-07",
+  "role-07", "role-07", "role-07", "role-07", "role-04",
+  "role-05", "role-06", "role-01", "role-02", "role-03",
 ] as const;
 
 export async function seedCore(client: PrismaClient): Promise<CoreSeedResult> {
@@ -91,13 +116,13 @@ export async function seedCore(client: PrismaClient): Promise<CoreSeedResult> {
         id,
         organizationId: ORGANIZATION_ID,
         employeeCode: `CFU-${String(index).padStart(3, "0")}`,
-        displayName: `CareFlow Team Member ${String(index).padStart(2, "0")}`,
+        displayName: displayNames[index - 1],
         email: `team.member${String(index).padStart(2, "0")}@careflow.example.invalid`,
         active: true,
       },
-      update: { active: true },
+      update: { displayName: displayNames[index - 1], active: true },
     });
-    const roleId = roles[(index - 1) % roles.length][0];
+    const roleId = userRoleIds[index - 1];
     const locationId = locations[(index - 1) % locations.length][0];
     await client.userAssignment.upsert({
       where: { id: `assignment-${String(index).padStart(2, "0")}` },
