@@ -2,6 +2,7 @@ import { McpApp, Module, ConfigModule } from '@nitrostack/core';
 import { CalculatorModule } from './modules/calculator/calculator.module.js';
 import { PharmacyModule } from './modules/pharmacy/pharmacy.module.js';
 import { SystemHealthCheck } from './health/system.health.js';
+import { ProcurementModule } from './modules/procurement/procurement.module.js';
 
 /**
  * Root Application Module
@@ -25,7 +26,8 @@ import { SystemHealthCheck } from './health/system.health.js';
   imports: [
     ConfigModule.forRoot(),
     CalculatorModule,
-    PharmacyModule
+    PharmacyModule,
+    ProcurementModule
   ],
   providers: [
     SystemHealthCheck,
