@@ -26,6 +26,62 @@
       "tags": ["careflow", "hospital-operations", "orchestrator", "handoff", "governance"]
     },
     {
+      "uri": "/inventory-control",
+      "name": "CareFlow Inventory Control",
+      "description": "Pharmacy stock health, reorder guidance, governed procurement drafts, and administrator approval outcomes",
+      "examples": [
+        {
+          "name": "Pharmacy inventory risk preview",
+          "description": "Authoritative stock health with threshold and expiry evidence",
+          "data": {
+            "summary": {
+              "totalItems": 5,
+              "criticalCount": 1,
+              "lowCount": 1,
+              "normalCount": 2,
+              "overstockedCount": 1,
+              "expiredCount": 0,
+              "expiringSoonCount": 1,
+              "generatedAt": "2026-07-31T00:00:00.000Z"
+            },
+            "items": [
+              {
+                "id": "PH-001",
+                "name": "Amoxicillin 500mg",
+                "category": "Antibiotics",
+                "currentStock": 40,
+                "reorderThreshold": 100,
+                "maxCapacity": 1000,
+                "unit": "capsules",
+                "expiryDate": "2026-08-20T00:00:00.000Z",
+                "lastRestockedAt": "2026-06-16T00:00:00.000Z",
+                "status": "critical",
+                "daysUntilExpiry": 20,
+                "isExpired": false,
+                "isExpiringSoon": true
+              },
+              {
+                "id": "PH-002",
+                "name": "Paracetamol 500mg",
+                "category": "Analgesics",
+                "currentStock": 340,
+                "reorderThreshold": 200,
+                "maxCapacity": 1200,
+                "unit": "tablets",
+                "expiryDate": "2027-03-15T00:00:00.000Z",
+                "lastRestockedAt": "2026-07-20T00:00:00.000Z",
+                "status": "normal",
+                "daysUntilExpiry": 227,
+                "isExpired": false,
+                "isExpiringSoon": false
+              }
+            ]
+          }
+        }
+      ],
+      "tags": ["careflow", "hospital-operations", "inventory", "pharmacy", "procurement", "approval"]
+    },
+    {
       "uri": "/workforce-coordinator",
       "name": "CareFlow Workforce Coordinator",
       "description": "Deterministic operational staffing coverage, candidate evidence, workload balance, roster planning, and approval-gated prepared actions",

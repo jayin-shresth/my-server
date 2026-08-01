@@ -1,4 +1,4 @@
-import { ToolDecorator as Tool, ExecutionContext, z } from '@nitrostack/core';
+import { ToolDecorator as Tool, ExecutionContext, Widget } from '@nitrostack/core';
 import {
   pharmacyService,
   recommendationService,
@@ -56,6 +56,7 @@ export class PharmacyTools {
       }
     }
   })
+  @Widget('inventory-control')
   async getPharmacyStatus(input: any, ctx: ExecutionContext) {
     ctx.logger.info('Executing get_pharmacy_status', {
       category: input?.category,
@@ -83,6 +84,7 @@ export class PharmacyTools {
       "or delaying purchases. It never modifies inventory.",
     inputSchema: RecommendPharmacyReorderInputSchema,
   })
+  @Widget('inventory-control')
   async recommendPharmacyReorder(input: any, ctx: ExecutionContext) {
     ctx.logger.info("Executing recommend_pharmacy_reorder", {
       category: input?.category,

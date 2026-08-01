@@ -1,4 +1,4 @@
-import { ToolDecorator as Tool, ExecutionContext } from '@nitrostack/core';
+import { ToolDecorator as Tool, ExecutionContext, Widget } from '@nitrostack/core';
 import { approvalService } from './approval.instance.js';
 import { ApprovePreparedActionInputSchema } from './approval.types.js';
 
@@ -28,6 +28,7 @@ export class ApprovalTools {
       }
     }
   })
+  @Widget('inventory-control')
   async approvePreparedAction(input: unknown, ctx: ExecutionContext) {
     ctx.logger.info('Executing approve_prepared_action', {
       approvalRequestId: (input as any)?.approvalRequestId,

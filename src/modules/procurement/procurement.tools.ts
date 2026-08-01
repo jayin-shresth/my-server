@@ -1,4 +1,4 @@
-import { ToolDecorator as Tool, ExecutionContext } from '@nitrostack/core';
+import { ToolDecorator as Tool, ExecutionContext, Widget } from '@nitrostack/core';
 import { procurementService } from './procurement.instance.js';
 import { PrepareProcurementActionInputSchema } from './procurement.types.js';
 
@@ -36,6 +36,7 @@ export class ProcurementTools {
       }
     }
   })
+  @Widget('inventory-control')
   async prepareProcurementAction(input: unknown, ctx: ExecutionContext) {
     ctx.logger.info('Executing prepare_procurement_action', {
       category: (input as any)?.category,
