@@ -2,47 +2,69 @@
   "version": "1.0.0",
   "widgets": [
     {
-      "uri": "/calculator-result",
-      "name": "Calculator Result",
-      "description": "Displays the result of a calculation with operation details",
+      "uri": "/agent-router",
+      "name": "CareFlow Orchestrator",
+      "description": "Hospital operations routing surface backed by persisted CareFlow handoffs and verified specialist availability",
       "examples": [
         {
-          "name": "Addition Example",
-          "description": "Shows the result of adding 5 + 3",
+          "name": "CareFlow integration preview",
+          "description": "Release preview with the integrated Workforce Coordinator and transparent unavailable providers",
           "data": {
-            "operation": "add",
-            "a": 5,
-            "b": 3,
-            "result": 8,
-            "expression": "5 + 3 = 8"
-          }
-        },
-        {
-          "name": "Multiplication Example",
-          "description": "Shows the result of multiplying 6 × 7",
-          "data": {
-            "operation": "multiply",
-            "a": 6,
-            "b": 7,
-            "result": 42,
-            "expression": "6 × 7 = 42"
-          }
-        },
-        {
-          "name": "Division Example",
-          "description": "Shows the result of dividing 20 ÷ 4",
-          "data": {
-            "operation": "divide",
-            "a": 20,
-            "b": 4,
-            "result": 5,
-            "expression": "20 ÷ 4 = 5"
+            "workspace": "CareFlow admin",
+            "specialists": [
+              { "id": "inventory-procurement-agent", "name": "Inventory & Procurement", "description": "Control tower, shortage, and procurement workflows", "specialistPromptName": "careflow_inventory_procurement_specialist", "status": "unavailable", "unavailableReason": "No registered provider", "operations": [] },
+              { "id": "workforce-coordinator", "name": "Workforce Coordinator", "description": "Staffing gaps and weekly roster planning", "specialistPromptName": "careflow_workforce_coordinator", "status": "available", "unavailableReason": null, "operations": [
+                { "name": "analyze_staffing_gap", "description": "Analyze a known staffing gap.", "toolName": "analyze_staffing_gap", "risk": "READ_ONLY", "approvalBoundary": "Analysis cannot change assignments.", "available": true, "unavailableReason": null },
+                { "name": "prepare_staff_reassignment", "description": "Prepare a reviewable reassignment.", "toolName": "prepare_staff_reassignment", "risk": "DRAFT", "approvalBoundary": "Human approval is required before execution.", "available": true, "unavailableReason": null },
+                { "name": "build_weekly_roster_plan", "description": "Build a deterministic weekly roster plan.", "toolName": "build_weekly_roster_plan", "risk": "READ_ONLY", "approvalBoundary": "Planning cannot publish assignments.", "available": true, "unavailableReason": null },
+                { "name": "prepare_weekly_roster", "description": "Prepare a reviewable weekly roster.", "toolName": "prepare_weekly_roster", "risk": "DRAFT", "approvalBoundary": "Human approval is required before publication.", "available": true, "unavailableReason": null }
+              ] }
+            ]
           }
         }
       ],
-      "tags": ["calculator", "math", "result"]
+      "tags": ["careflow", "hospital-operations", "orchestrator", "handoff", "governance"]
+    },
+    {
+      "uri": "/workforce-coordinator",
+      "name": "CareFlow Workforce Coordinator",
+      "description": "Deterministic operational staffing coverage, candidate evidence, workload balance, roster planning, and approval-gated prepared actions",
+      "examples": [
+        {
+          "name": "Published ICU staffing-gap preview",
+          "description": "Deterministic safe DTO preview for SHIFT-ICU-20260709-DAY",
+          "data": {
+            "view": "staffing_gap",
+            "analysis": {
+              "gap": {
+                "shiftId": "shift-icu-20260709-day",
+                "shiftCode": "SHIFT-ICU-20260709-DAY",
+                "shiftType": "DAY",
+                "startsAt": "2026-07-09T01:30:00.000Z",
+                "endsAt": "2026-07-09T09:30:00.000Z",
+                "requiredHeadcount": 4,
+                "confirmedCoverage": 3,
+                "absentCoverage": 1,
+                "proposedCoverage": 0,
+                "gapSize": 1,
+                "assignments": []
+              },
+              "evaluatedCandidates": [
+                { "staffId": "staff-user-05", "employeeCode": "CF-EMP-005", "displayName": "Riya Menon", "eligible": true, "reasonCodes": ["ELIGIBLE"], "currentWeeklyHours": 32, "resultingWeeklyHours": 40, "homeLocationMatch": true, "recentShiftTypeContinuity": true, "finalRank": 1, "recommended": true },
+                { "staffId": "staff-user-06", "employeeCode": "CF-EMP-006", "displayName": "Ananya Shah", "eligible": false, "reasonCodes": ["MAX_WEEKLY_MINUTES"], "currentWeeklyHours": 48, "resultingWeeklyHours": 56, "homeLocationMatch": true, "recentShiftTypeContinuity": false, "finalRank": null, "recommended": false },
+                { "staffId": "staff-user-07", "employeeCode": "CF-EMP-007", "displayName": "Priya Deshmukh", "eligible": false, "reasonCodes": ["APPROVED_UNAVAILABILITY"], "currentWeeklyHours": 40, "resultingWeeklyHours": 48, "homeLocationMatch": false, "recentShiftTypeContinuity": false, "finalRank": null, "recommended": false },
+                { "staffId": "staff-user-08", "employeeCode": "CF-EMP-008", "displayName": "Saanvi Joshi", "eligible": false, "reasonCodes": ["MISSING_REQUIRED_SKILL"], "currentWeeklyHours": 0, "resultingWeeklyHours": 8, "homeLocationMatch": false, "recentShiftTypeContinuity": false, "finalRank": null, "recommended": false },
+                { "staffId": "staff-user-09", "employeeCode": "CF-EMP-009", "displayName": "Diya Kapoor", "eligible": false, "reasonCodes": ["MINIMUM_REST"], "currentWeeklyHours": 40, "resultingWeeklyHours": 48, "homeLocationMatch": false, "recentShiftTypeContinuity": false, "finalRank": null, "recommended": false }
+              ],
+              "recommendedCandidate": { "staffId": "staff-user-05", "employeeCode": "CF-EMP-005", "displayName": "Riya Menon", "eligible": true, "reasonCodes": ["ELIGIBLE"], "currentWeeklyHours": 32, "resultingWeeklyHours": 40, "homeLocationMatch": true, "recentShiftTypeContinuity": true, "finalRank": 1, "recommended": true },
+              "explanation": "SHIFT-ICU-20260709-DAY has 1 open position. CF-EMP-005 is the highest-ranked eligible replacement.",
+              "nextPermittedAction": "PREPARE_STAFF_REASSIGNMENT"
+            }
+          }
+        }
+      ],
+      "tags": ["careflow", "hospital-operations", "workforce", "staffing", "roster", "governance"]
     }
   ],
-  "generatedAt": "2025-01-01T00:00:00.000Z"
+  "generatedAt": "2026-07-31T00:00:00.000Z"
 }
-

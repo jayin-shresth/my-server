@@ -505,10 +505,6 @@ export type StockBatchUncheckedUpdateManyWithoutItemNestedInput = {
   deleteMany?: Prisma.StockBatchScalarWhereInput | Prisma.StockBatchScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type StockBatchCreateNestedOneWithoutLedgerEntriesInput = {
   create?: Prisma.XOR<Prisma.StockBatchCreateWithoutLedgerEntriesInput, Prisma.StockBatchUncheckedCreateWithoutLedgerEntriesInput>
   connectOrCreate?: Prisma.StockBatchCreateOrConnectWithoutLedgerEntriesInput

@@ -195,6 +195,8 @@ export type UserWhereInput = {
   requirements?: Prisma.RequirementListRelationFilter
   approvalDecisions?: Prisma.ApprovalDecisionListRelationFilter
   assetAllocations?: Prisma.AssetAllocationListRelationFilter
+  staffProfile?: Prisma.XOR<Prisma.StaffProfileNullableScalarRelationFilter, Prisma.StaffProfileWhereInput> | null
+  approvedUnavailability?: Prisma.StaffUnavailabilityListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -209,6 +211,8 @@ export type UserOrderByWithRelationInput = {
   requirements?: Prisma.RequirementOrderByRelationAggregateInput
   approvalDecisions?: Prisma.ApprovalDecisionOrderByRelationAggregateInput
   assetAllocations?: Prisma.AssetAllocationOrderByRelationAggregateInput
+  staffProfile?: Prisma.StaffProfileOrderByWithRelationInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -226,6 +230,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   requirements?: Prisma.RequirementListRelationFilter
   approvalDecisions?: Prisma.ApprovalDecisionListRelationFilter
   assetAllocations?: Prisma.AssetAllocationListRelationFilter
+  staffProfile?: Prisma.XOR<Prisma.StaffProfileNullableScalarRelationFilter, Prisma.StaffProfileWhereInput> | null
+  approvedUnavailability?: Prisma.StaffUnavailabilityListRelationFilter
 }, "id" | "employeeCode" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -263,6 +269,8 @@ export type UserCreateInput = {
   requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -276,6 +284,8 @@ export type UserUncheckedCreateInput = {
   requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUpdateInput = {
@@ -289,6 +299,8 @@ export type UserUpdateInput = {
   requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -302,6 +314,8 @@ export type UserUncheckedUpdateInput = {
   requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -372,6 +386,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserCreateNestedManyWithoutOrganizationInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutOrganizationInput, Prisma.UserUncheckedCreateWithoutOrganizationInput> | Prisma.UserCreateWithoutOrganizationInput[] | Prisma.UserUncheckedCreateWithoutOrganizationInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutOrganizationInput | Prisma.UserCreateOrConnectWithoutOrganizationInput[]
@@ -428,6 +447,36 @@ export type UserUpdateOneRequiredWithoutAssignmentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAssignmentsInput, Prisma.UserUpdateWithoutAssignmentsInput>, Prisma.UserUncheckedUpdateWithoutAssignmentsInput>
 }
 
+export type UserCreateNestedOneWithoutStaffProfileInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffProfileInput, Prisma.UserUncheckedCreateWithoutStaffProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStaffProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffProfileInput, Prisma.UserUncheckedCreateWithoutStaffProfileInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffProfileInput
+  upsert?: Prisma.UserUpsertWithoutStaffProfileInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStaffProfileInput, Prisma.UserUpdateWithoutStaffProfileInput>, Prisma.UserUncheckedUpdateWithoutStaffProfileInput>
+}
+
+export type UserCreateNestedOneWithoutApprovedUnavailabilityInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedUnavailabilityInput, Prisma.UserUncheckedCreateWithoutApprovedUnavailabilityInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedUnavailabilityInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutApprovedUnavailabilityNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutApprovedUnavailabilityInput, Prisma.UserUncheckedCreateWithoutApprovedUnavailabilityInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApprovedUnavailabilityInput
+  upsert?: Prisma.UserUpsertWithoutApprovedUnavailabilityInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutApprovedUnavailabilityInput, Prisma.UserUpdateWithoutApprovedUnavailabilityInput>, Prisma.UserUncheckedUpdateWithoutApprovedUnavailabilityInput>
+}
+
 export type UserCreateNestedOneWithoutRequirementsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutRequirementsInput, Prisma.UserUncheckedCreateWithoutRequirementsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequirementsInput
@@ -480,6 +529,8 @@ export type UserCreateWithoutOrganizationInput = {
   requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -492,6 +543,8 @@ export type UserUncheckedCreateWithoutOrganizationInput = {
   requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserCreateOrConnectWithoutOrganizationInput = {
@@ -541,6 +594,8 @@ export type UserCreateWithoutAssignmentsInput = {
   requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignmentsInput = {
@@ -553,6 +608,8 @@ export type UserUncheckedCreateWithoutAssignmentsInput = {
   requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignmentsInput = {
@@ -581,6 +638,8 @@ export type UserUpdateWithoutAssignmentsInput = {
   requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignmentsInput = {
@@ -593,6 +652,152 @@ export type UserUncheckedUpdateWithoutAssignmentsInput = {
   requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
+}
+
+export type UserCreateWithoutStaffProfileInput = {
+  id: string
+  employeeCode: string
+  displayName: string
+  email: string
+  active?: boolean
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  assignments?: Prisma.UserAssignmentCreateNestedManyWithoutUserInput
+  requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
+  approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
+  assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
+}
+
+export type UserUncheckedCreateWithoutStaffProfileInput = {
+  id: string
+  organizationId: string
+  employeeCode: string
+  displayName: string
+  email: string
+  active?: boolean
+  assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutUserInput
+  requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
+  approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
+}
+
+export type UserCreateOrConnectWithoutStaffProfileInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffProfileInput, Prisma.UserUncheckedCreateWithoutStaffProfileInput>
+}
+
+export type UserUpsertWithoutStaffProfileInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStaffProfileInput, Prisma.UserUncheckedUpdateWithoutStaffProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffProfileInput, Prisma.UserUncheckedCreateWithoutStaffProfileInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStaffProfileInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStaffProfileInput, Prisma.UserUncheckedUpdateWithoutStaffProfileInput>
+}
+
+export type UserUpdateWithoutStaffProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  assignments?: Prisma.UserAssignmentUpdateManyWithoutUserNestedInput
+  requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
+  approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
+  assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStaffProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
+  approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
+}
+
+export type UserCreateWithoutApprovedUnavailabilityInput = {
+  id: string
+  employeeCode: string
+  displayName: string
+  email: string
+  active?: boolean
+  organization: Prisma.OrganizationCreateNestedOneWithoutUsersInput
+  assignments?: Prisma.UserAssignmentCreateNestedManyWithoutUserInput
+  requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
+  approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
+  assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutApprovedUnavailabilityInput = {
+  id: string
+  organizationId: string
+  employeeCode: string
+  displayName: string
+  email: string
+  active?: boolean
+  assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutUserInput
+  requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
+  approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutApprovedUnavailabilityInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutApprovedUnavailabilityInput, Prisma.UserUncheckedCreateWithoutApprovedUnavailabilityInput>
+}
+
+export type UserUpsertWithoutApprovedUnavailabilityInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutApprovedUnavailabilityInput, Prisma.UserUncheckedUpdateWithoutApprovedUnavailabilityInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutApprovedUnavailabilityInput, Prisma.UserUncheckedCreateWithoutApprovedUnavailabilityInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutApprovedUnavailabilityInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutApprovedUnavailabilityInput, Prisma.UserUncheckedUpdateWithoutApprovedUnavailabilityInput>
+}
+
+export type UserUpdateWithoutApprovedUnavailabilityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  organization?: Prisma.OrganizationUpdateOneRequiredWithoutUsersNestedInput
+  assignments?: Prisma.UserAssignmentUpdateManyWithoutUserNestedInput
+  requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
+  approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
+  assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutApprovedUnavailabilityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  employeeCode?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutUserNestedInput
+  requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
+  approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
+  assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRequirementsInput = {
@@ -605,6 +810,8 @@ export type UserCreateWithoutRequirementsInput = {
   assignments?: Prisma.UserAssignmentCreateNestedManyWithoutUserInput
   approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUncheckedCreateWithoutRequirementsInput = {
@@ -617,6 +824,8 @@ export type UserUncheckedCreateWithoutRequirementsInput = {
   assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutUserInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserCreateOrConnectWithoutRequirementsInput = {
@@ -645,6 +854,8 @@ export type UserUpdateWithoutRequirementsInput = {
   assignments?: Prisma.UserAssignmentUpdateManyWithoutUserNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequirementsInput = {
@@ -657,6 +868,8 @@ export type UserUncheckedUpdateWithoutRequirementsInput = {
   assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutUserNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserCreateWithoutAssetAllocationsInput = {
@@ -669,6 +882,8 @@ export type UserCreateWithoutAssetAllocationsInput = {
   assignments?: Prisma.UserAssignmentCreateNestedManyWithoutUserInput
   requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionCreateNestedManyWithoutApproverInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUncheckedCreateWithoutAssetAllocationsInput = {
@@ -681,6 +896,8 @@ export type UserUncheckedCreateWithoutAssetAllocationsInput = {
   assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutUserInput
   requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedCreateNestedManyWithoutApproverInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserCreateOrConnectWithoutAssetAllocationsInput = {
@@ -709,6 +926,8 @@ export type UserUpdateWithoutAssetAllocationsInput = {
   assignments?: Prisma.UserAssignmentUpdateManyWithoutUserNestedInput
   requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssetAllocationsInput = {
@@ -721,6 +940,8 @@ export type UserUncheckedUpdateWithoutAssetAllocationsInput = {
   assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutUserNestedInput
   requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserCreateWithoutApprovalDecisionsInput = {
@@ -733,6 +954,8 @@ export type UserCreateWithoutApprovalDecisionsInput = {
   assignments?: Prisma.UserAssignmentCreateNestedManyWithoutUserInput
   requirements?: Prisma.RequirementCreateNestedManyWithoutRequestedByInput
   assetAllocations?: Prisma.AssetAllocationCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserUncheckedCreateWithoutApprovalDecisionsInput = {
@@ -745,6 +968,8 @@ export type UserUncheckedCreateWithoutApprovalDecisionsInput = {
   assignments?: Prisma.UserAssignmentUncheckedCreateNestedManyWithoutUserInput
   requirements?: Prisma.RequirementUncheckedCreateNestedManyWithoutRequestedByInput
   assetAllocations?: Prisma.AssetAllocationUncheckedCreateNestedManyWithoutAllocatedByInput
+  staffProfile?: Prisma.StaffProfileUncheckedCreateNestedOneWithoutUserInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedCreateNestedManyWithoutApprovedByInput
 }
 
 export type UserCreateOrConnectWithoutApprovalDecisionsInput = {
@@ -773,6 +998,8 @@ export type UserUpdateWithoutApprovalDecisionsInput = {
   assignments?: Prisma.UserAssignmentUpdateManyWithoutUserNestedInput
   requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApprovalDecisionsInput = {
@@ -785,6 +1012,8 @@ export type UserUncheckedUpdateWithoutApprovalDecisionsInput = {
   assignments?: Prisma.UserAssignmentUncheckedUpdateManyWithoutUserNestedInput
   requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserCreateManyOrganizationInput = {
@@ -805,6 +1034,8 @@ export type UserUpdateWithoutOrganizationInput = {
   requirements?: Prisma.RequirementUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -817,6 +1048,8 @@ export type UserUncheckedUpdateWithoutOrganizationInput = {
   requirements?: Prisma.RequirementUncheckedUpdateManyWithoutRequestedByNestedInput
   approvalDecisions?: Prisma.ApprovalDecisionUncheckedUpdateManyWithoutApproverNestedInput
   assetAllocations?: Prisma.AssetAllocationUncheckedUpdateManyWithoutAllocatedByNestedInput
+  staffProfile?: Prisma.StaffProfileUncheckedUpdateOneWithoutUserNestedInput
+  approvedUnavailability?: Prisma.StaffUnavailabilityUncheckedUpdateManyWithoutApprovedByNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutOrganizationInput = {
@@ -837,6 +1070,7 @@ export type UserCountOutputType = {
   requirements: number
   approvalDecisions: number
   assetAllocations: number
+  approvedUnavailability: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -844,6 +1078,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   requirements?: boolean | UserCountOutputTypeCountRequirementsArgs
   approvalDecisions?: boolean | UserCountOutputTypeCountApprovalDecisionsArgs
   assetAllocations?: boolean | UserCountOutputTypeCountAssetAllocationsArgs
+  approvedUnavailability?: boolean | UserCountOutputTypeCountApprovedUnavailabilityArgs
 }
 
 /**
@@ -884,6 +1119,13 @@ export type UserCountOutputTypeCountAssetAllocationsArgs<ExtArgs extends runtime
   where?: Prisma.AssetAllocationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountApprovedUnavailabilityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffUnavailabilityWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -897,6 +1139,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   requirements?: boolean | Prisma.User$requirementsArgs<ExtArgs>
   approvalDecisions?: boolean | Prisma.User$approvalDecisionsArgs<ExtArgs>
   assetAllocations?: boolean | Prisma.User$assetAllocationsArgs<ExtArgs>
+  staffProfile?: boolean | Prisma.User$staffProfileArgs<ExtArgs>
+  approvedUnavailability?: boolean | Prisma.User$approvedUnavailabilityArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -936,6 +1180,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   requirements?: boolean | Prisma.User$requirementsArgs<ExtArgs>
   approvalDecisions?: boolean | Prisma.User$approvalDecisionsArgs<ExtArgs>
   assetAllocations?: boolean | Prisma.User$assetAllocationsArgs<ExtArgs>
+  staffProfile?: boolean | Prisma.User$staffProfileArgs<ExtArgs>
+  approvedUnavailability?: boolean | Prisma.User$approvedUnavailabilityArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -953,6 +1199,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     requirements: Prisma.$RequirementPayload<ExtArgs>[]
     approvalDecisions: Prisma.$ApprovalDecisionPayload<ExtArgs>[]
     assetAllocations: Prisma.$AssetAllocationPayload<ExtArgs>[]
+    staffProfile: Prisma.$StaffProfilePayload<ExtArgs> | null
+    approvedUnavailability: Prisma.$StaffUnavailabilityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1360,6 +1608,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   requirements<T extends Prisma.User$requirementsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requirementsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   approvalDecisions<T extends Prisma.User$approvalDecisionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvalDecisionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApprovalDecisionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assetAllocations<T extends Prisma.User$assetAllocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$assetAllocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssetAllocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  staffProfile<T extends Prisma.User$staffProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffProfileArgs<ExtArgs>>): Prisma.Prisma__StaffProfileClient<runtime.Types.Result.GetResult<Prisma.$StaffProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  approvedUnavailability<T extends Prisma.User$approvedUnavailabilityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$approvedUnavailabilityArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffUnavailabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1887,6 +2137,49 @@ export type User$assetAllocationsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.AssetAllocationScalarFieldEnum | Prisma.AssetAllocationScalarFieldEnum[]
+}
+
+/**
+ * User.staffProfile
+ */
+export type User$staffProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffProfile
+   */
+  select?: Prisma.StaffProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffProfile
+   */
+  omit?: Prisma.StaffProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffProfileInclude<ExtArgs> | null
+  where?: Prisma.StaffProfileWhereInput
+}
+
+/**
+ * User.approvedUnavailability
+ */
+export type User$approvedUnavailabilityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StaffUnavailability
+   */
+  select?: Prisma.StaffUnavailabilitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StaffUnavailability
+   */
+  omit?: Prisma.StaffUnavailabilityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffUnavailabilityInclude<ExtArgs> | null
+  where?: Prisma.StaffUnavailabilityWhereInput
+  orderBy?: Prisma.StaffUnavailabilityOrderByWithRelationInput | Prisma.StaffUnavailabilityOrderByWithRelationInput[]
+  cursor?: Prisma.StaffUnavailabilityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffUnavailabilityScalarFieldEnum | Prisma.StaffUnavailabilityScalarFieldEnum[]
 }
 
 /**

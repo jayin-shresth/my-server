@@ -49,6 +49,9 @@ coverage/
 # Uploads
 uploads/
 
+# Local deployment archives
+*.zip
+
 # TypeScript cache
 *.tsbuildinfo
 
@@ -63,3 +66,6 @@ uploads/
 *.key
 tokens.json
 .nitrostudio/
+
+# Added by nitrostack pack
+.git/

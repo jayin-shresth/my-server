@@ -1,8 +1,10 @@
 import { McpApp, Module, ConfigModule } from '@nitrostack/core';
 import { PharmacyModule } from './modules/pharmacy/pharmacy.module.js';
+import { OrchestratorModule } from './modules/orchestrator/orchestrator.module.js';
+import { WorkforceModule } from './modules/workforce/workforce.module.js';
 import { SystemHealthCheck } from './health/system.health.js';
 import { ProcurementModule } from './modules/procurement/procurement.module.js';
-import { ApprovalModule } from "./modules/approval/approval.module.js";
+import { ApprovalModule } from './modules/approval/approval.module.js';
 
 /**
  * Root Application Module
@@ -13,7 +15,7 @@ import { ApprovalModule } from "./modules/approval/approval.module.js";
 @McpApp({
   module: AppModule,
   server: {
-    name: 'hospital-operations-server',
+    name: 'careflow-logistics',
     version: '1.0.0'
   },
   logging: {
@@ -27,7 +29,9 @@ import { ApprovalModule } from "./modules/approval/approval.module.js";
     ConfigModule.forRoot(),
     PharmacyModule,
     ProcurementModule,
-    ApprovalModule
+    ApprovalModule,
+    OrchestratorModule,
+    WorkforceModule
   ],
   providers: [
     SystemHealthCheck,

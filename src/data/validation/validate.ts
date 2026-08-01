@@ -1,6 +1,11 @@
 import { readFile } from "node:fs/promises";
 import { prisma } from "../client.js";
 import { at, ICU_ITEM_ID, LOCATION_IDS, ORGANIZATION_ID } from "../seed/constants.js";
+import {
+  buildWeeklyRosterPlan,
+  evaluateReplacementCandidates,
+  getShiftCoverage,
+} from "../workforce.js";
 
 const failures: string[] = [];
 
@@ -26,7 +31,7 @@ async function validateCounts(): Promise<Record<string, number>> {
   ]);
   check(organizations === 1, `Expected one CareFlow organization, found ${organizations}`);
   check(locations === 12, `Expected exactly 12 operational locations, found ${locations}`);
-  check(roles >= 5 && roles <= 7, `Expected 5-7 roles, found ${roles}`);
+  check(roles === 7, `Expected exactly 7 roles, found ${roles}`);
   check(activeUsers === 15, `Expected exactly 15 active users, found ${activeUsers}`);
   check(items === 120, `Expected exactly 120 catalogue items, found ${items}`);
   check(suppliers >= 10 && suppliers <= 15, `Expected 10-15 suppliers, found ${suppliers}`);
@@ -197,7 +202,11 @@ async function validateWorkflowsAndAssets(): Promise<void> {
   check(actions.some((action) => action.status === "PENDING_APPROVAL" && action.executions.length === 0), "Pending approval example is missing");
   check(actions.some((action) => action.status === "REJECTED" && action.executions.length === 0), "Rejected action example is missing");
   check(actions.some((action) => action.executions.some((execution) => execution.status === "FAILED")), "Failed execution example is missing");
-  check(new Set(actions.map((action) => action.requesterType)).size === 3, "Prepared actions do not demonstrate USER, AGENT, and SYSTEM requesters");
+  const requesterTypes = new Set(actions.map((action) => action.requesterType));
+  check(
+    ["USER", "AGENT", "SYSTEM"].every((requesterType) => requesterTypes.has(requesterType)),
+    "Prepared actions do not demonstrate USER, AGENT, and SYSTEM requesters",
+  );
   const purchaseOrders = await prisma.purchaseOrder.findMany();
   for (const purchaseOrder of purchaseOrders) {
     const supportingExecution = actions.some((action) => action.executions.some((execution) => execution.status === "SUCCEEDED" && execution.resultType === "PURCHASE_ORDER" && execution.resultId === purchaseOrder.id));
@@ -234,9 +243,185 @@ async function validateOperationalLogistics(): Promise<void> {
 
 async function validateScopeExclusions(): Promise<void> {
   const schema = await readFile("prisma/schema.prisma", "utf8");
-  check(!/^model\s+(Forecast|Prediction|Diagnosis|TreatmentRecommendation)\b/m.test(schema), "Forbidden predictive or clinical-decision model found in schema");
+  check(!/^model\s+(Forecast|Prediction|Diagnosis|TreatmentRecommendation|Patient|PatientRecord)\b/m.test(schema), "Forbidden predictive, patient, or clinical-decision model found in schema");
   const forbiddenRecords = await prisma.workflowRun.count({ where: { OR: [{ workflowType: { contains: "FORECAST" } }, { workflowType: { contains: "PREDICT" } }, { workflowType: { contains: "DIAGNOS" } }] } });
   check(forbiddenRecords === 0, "Forbidden predictive or diagnostic workflow record found");
+}
+
+function workforceLocalDay(date: Date): number {
+  return Math.floor((date.getTime() + 330 * 60_000) / 86_400_000);
+}
+
+function longestWorkforceRun(shifts: readonly { startsAt: Date }[]): number {
+  const days = [...new Set(shifts.map((shift) => workforceLocalDay(shift.startsAt)))].sort((left, right) => left - right);
+  let longest = 0;
+  let current = 0;
+  let previous: number | null = null;
+  for (const day of days) {
+    current = previous !== null && day === previous + 1 ? current + 1 : 1;
+    longest = Math.max(longest, current);
+    previous = day;
+  }
+  return longest;
+}
+
+async function validateWorkforce(): Promise<Record<string, number>> {
+  const publishedWeekStart = new Date("2026-07-06T00:00:00+05:30");
+  const planningWeekStart = new Date("2026-07-13T00:00:00+05:30");
+  const [profiles, nurses, qualifiedNurses, shifts, publishedShifts, planningShifts, publishedAssignments, planningAssignments] = await Promise.all([
+    prisma.staffProfile.count(),
+    prisma.staffProfile.count({ where: { staffType: "REGISTERED_NURSE" } }),
+    prisma.staffProfile.count({
+      where: {
+        staffType: "REGISTERED_NURSE",
+        active: true,
+        employmentStatus: "ACTIVE",
+        skills: {
+          some: {
+            skillCode: "ICU_CRITICAL_CARE",
+            active: true,
+            validFrom: { lte: publishedWeekStart },
+            OR: [{ validUntil: null }, { validUntil: { gte: new Date("2026-07-20T07:00:00+05:30") } }],
+          },
+        },
+      },
+    }),
+    prisma.shift.count(),
+    prisma.shift.count({ where: { rosterWeekStart: publishedWeekStart, status: "PUBLISHED" } }),
+    prisma.shift.count({ where: { rosterWeekStart: planningWeekStart, status: "OPEN" } }),
+    prisma.shiftAssignment.count({ where: { shift: { rosterWeekStart: publishedWeekStart } } }),
+    prisma.shiftAssignment.count({ where: { shift: { rosterWeekStart: planningWeekStart } } }),
+  ]);
+  check(profiles === 15, `Expected 15 staff profiles, found ${profiles}`);
+  check(nurses === 9, `Expected 9 registered nurses, found ${nurses}`);
+  check(qualifiedNurses === 8, `Expected 8 ICU-qualified nurses, found ${qualifiedNurses}`);
+  check(shifts === 42, `Expected 42 workforce shifts, found ${shifts}`);
+  check(publishedShifts === 21, `Expected 21 published-week shifts, found ${publishedShifts}`);
+  check(planningShifts === 21, `Expected 21 planning-week shifts, found ${planningShifts}`);
+  check(publishedAssignments === 44, `Expected 44 published assignment slots, found ${publishedAssignments}`);
+  check(planningAssignments === 0, `Planning week must have zero persisted assignments, found ${planningAssignments}`);
+
+  const expectedRoles = [
+    "CLINICAL_STAFF", "CLINICAL_STAFF", "CLINICAL_STAFF", "CLINICAL_STAFF", "CLINICAL_STAFF",
+    "CLINICAL_STAFF", "CLINICAL_STAFF", "CLINICAL_STAFF", "CLINICAL_STAFF", "FINANCE_APPROVER",
+    "COMPLIANCE_OFFICER", "OPERATIONS_ADMIN", "INVENTORY_OFFICER", "PHARMACY_MANAGER", "PROCUREMENT_OFFICER",
+  ] as const;
+  const expectedNames = [
+    "Asha Nair", "Meera Kulkarni", "Kavya Rao", "Neha Iyer", "Riya Menon",
+    "Ananya Shah", "Priya Deshmukh", "Saanvi Joshi", "Diya Kapoor", "Arjun Malhotra",
+    "Nandita Bose", "Vikram Shetty", "Rahul Patil", "Isha Banerjee", "Karan Mehta",
+  ] as const;
+  const users = await prisma.user.findMany({ where: { organizationId: ORGANIZATION_ID }, include: { assignments: { include: { role: true } } }, orderBy: { employeeCode: "asc" } });
+  users.forEach((user, index) => {
+    check(user.displayName === expectedNames[index], `${user.id} does not have the expected synthetic display name`);
+    check(user.assignments.length === 1 && user.assignments[0]?.role.code === expectedRoles[index], `${user.id} does not have the expected authorization role`);
+  });
+
+  const targetShiftId = "shift-icu-20260709-day";
+  const coverage = await getShiftCoverage(prisma, ORGANIZATION_ID, targetShiftId);
+  check(coverage.activeAssignmentCount === 3 && coverage.requiredHeadcount === 4, `Target shift coverage should be 3/4, found ${coverage.activeAssignmentCount}/${coverage.requiredHeadcount}`);
+  check(coverage.absentAssignmentCount === 1, `Target shift should preserve one absent assignment, found ${coverage.absentAssignmentCount}`);
+  const candidates = await evaluateReplacementCandidates(prisma, ORGANIZATION_ID, targetShiftId);
+  const candidate = (userId: string) => candidates.find((item) => item.userId === userId);
+  const user05 = candidate("user-05");
+  const user06 = candidate("user-06");
+  const user07 = candidate("user-07");
+  const user08 = candidate("user-08");
+  const user09 = candidate("user-09");
+  check(candidates.filter((item) => item.eligible).length === 1, `Expected one eligible replacement, found ${candidates.filter((item) => item.eligible).length}`);
+  check(user05?.eligible === true && user05.recommended && user05.deterministicRank === 1, "User 05 is not the sole deterministic recommendation");
+  check(user05?.scheduledMinutes === 1_920 && user05.resultingMinutes === 2_400, `User 05 workload should move 1,920→2,400 minutes, found ${user05?.scheduledMinutes ?? -1}→${user05?.resultingMinutes ?? -1}`);
+  check(user06?.exclusionReasonCodes.includes("MAX_WEEKLY_MINUTES") === true, "User 06 is not excluded for maximum weekly minutes");
+  check(user07?.exclusionReasonCodes.includes("APPROVED_UNAVAILABILITY") === true, "User 07 is not excluded for approved unavailability");
+  check(user08?.exclusionReasonCodes.includes("MISSING_REQUIRED_SKILL") === true, "User 08 is not excluded for missing ICU skill");
+  check(user09?.exclusionReasonCodes.includes("MINIMUM_REST") === true, "User 09 is not excluded for minimum rest");
+  check(coverage.activeAssignmentCount + (user05?.eligible ? 1 : 0) === 4, "Recommended replacement would not produce 4/4 coverage");
+
+  const confirmedProfiles = await prisma.staffProfile.findMany({
+    include: {
+      skills: true,
+      assignments: {
+        where: { status: { in: ["DRAFT", "CONFIRMED"] } },
+        include: { shift: true },
+        orderBy: { shift: { startsAt: "asc" } },
+      },
+    },
+  });
+  for (const profile of confirmedProfiles) {
+    const byWeek = new Map<number, typeof profile.assignments>();
+    for (const assignment of profile.assignments) {
+      const key = assignment.shift.rosterWeekStart.getTime();
+      byWeek.set(key, [...(byWeek.get(key) ?? []), assignment]);
+    }
+    for (const assignments of byWeek.values()) {
+      const ordered = [...assignments].sort((left, right) => left.shift.startsAt.getTime() - right.shift.startsAt.getTime());
+      const minutes = ordered.reduce((total, assignment) => total + Math.round((assignment.shift.endsAt.getTime() - assignment.shift.startsAt.getTime()) / 60_000), 0);
+      check(minutes <= profile.maxMinutesPerWeek, `${profile.id} exceeds weekly maximum with ${minutes} minutes`);
+      for (let index = 1; index < ordered.length; index += 1) {
+        const previous = ordered[index - 1].shift;
+        const current = ordered[index].shift;
+        check(previous.startsAt < current.endsAt && previous.endsAt > current.startsAt ? false : true, `${profile.id} has overlapping confirmed assignments`);
+        const rest = Math.round((current.startsAt.getTime() - previous.endsAt.getTime()) / 60_000);
+        check(rest >= profile.minRestMinutes, `${profile.id} has only ${rest} rest minutes between confirmed assignments`);
+      }
+      check(longestWorkforceRun(ordered.map((assignment) => assignment.shift)) <= profile.maxConsecutiveShifts, `${profile.id} exceeds consecutive-shift limit`);
+      check(longestWorkforceRun(ordered.filter((assignment) => assignment.shift.shiftType === "NIGHT").map((assignment) => assignment.shift)) <= profile.maxConsecutiveNightShifts, `${profile.id} exceeds consecutive-night limit`);
+      for (const assignment of ordered) {
+        const validSkill = profile.skills.some(
+          (skill) => skill.skillCode === assignment.shift.requiredSkillCode && skill.active && skill.validFrom <= assignment.shift.startsAt && (skill.validUntil === null || skill.validUntil >= assignment.shift.endsAt),
+        );
+        check(validSkill, `${profile.id} lacks a valid skill for confirmed assignment ${assignment.code}`);
+      }
+    }
+  }
+
+  const plan = await buildWeeklyRosterPlan(prisma, ORGANIZATION_ID, LOCATION_IDS.icu, planningWeekStart);
+  check(plan.requiredSlots === 42 && plan.proposedAssignments.length === 42, `Planning builder should produce 42 assignments, found ${plan.proposedAssignments.length}`);
+  const plannedCounts = Object.values(plan.distribution).sort((left, right) => left - right);
+  check(plannedCounts.filter((count) => count === 6).length === 2, "Planning distribution does not contain exactly two six-shift nurses");
+  check(plannedCounts.filter((count) => count === 5).length === 6, "Planning distribution does not contain exactly six five-shift nurses");
+  const planByProfile = new Map<string, typeof plan.proposedAssignments>();
+  for (const assignment of plan.proposedAssignments) {
+    planByProfile.set(assignment.staffProfileId, [...(planByProfile.get(assignment.staffProfileId) ?? []), assignment]);
+  }
+  for (const [profileId, assignments] of planByProfile) {
+    const profile = confirmedProfiles.find((item) => item.id === profileId);
+    check(profile !== undefined, `Planned profile ${profileId} does not exist`);
+    if (profile === undefined) continue;
+    const ordered = [...assignments].sort((left, right) => left.startsAt.getTime() - right.startsAt.getTime());
+    const minutes = sum(ordered.map((assignment) => assignment.durationMinutes));
+    check(minutes <= profile.maxMinutesPerWeek, `Planned profile ${profileId} exceeds weekly minutes`);
+    for (let index = 1; index < ordered.length; index += 1) {
+      check(ordered[index - 1].endsAt <= ordered[index].startsAt, `Planned profile ${profileId} has overlapping shifts`);
+      const rest = Math.round((ordered[index].startsAt.getTime() - ordered[index - 1].endsAt.getTime()) / 60_000);
+      check(rest >= profile.minRestMinutes, `Planned profile ${profileId} violates minimum rest with ${rest} minutes`);
+    }
+    check(longestWorkforceRun(ordered) <= profile.maxConsecutiveShifts, `Planned profile ${profileId} exceeds consecutive shifts`);
+    check(longestWorkforceRun(ordered.filter((assignment) => assignment.shiftType === "NIGHT")) <= profile.maxConsecutiveNightShifts, `Planned profile ${profileId} exceeds consecutive nights`);
+    for (const assignment of ordered) {
+      const validSkill = profile.skills.some(
+        (skill) => skill.skillCode === "ICU_CRITICAL_CARE" && skill.active && skill.validFrom <= assignment.startsAt && (skill.validUntil === null || skill.validUntil >= assignment.endsAt),
+      );
+      check(validSkill, `Planned profile ${profileId} lacks ICU skill validity through ${assignment.shiftCode}`);
+    }
+  }
+
+  const notifications = await prisma.notificationDelivery.findMany();
+  check(notifications.length > 0, "Workforce notification-delivery example is missing");
+  check(new Set(notifications.map((notification) => notification.idempotencyKey)).size === notifications.length, "Notification idempotency keys are not unique");
+  check(notifications.every((notification) => notification.recipientMasked.includes("***") && /^[a-f0-9]{64}$/.test(notification.recipientHash)), "Notification recipient masking or hashing is unsafe");
+
+  return {
+    profiles,
+    nurses,
+    qualifiedNurses,
+    shifts,
+    publishedAssignments,
+    targetActiveCoverage: coverage.activeAssignmentCount,
+    targetRequiredCoverage: coverage.requiredHeadcount,
+    planningAssignments: plan.proposedAssignments.length,
+    notifications: notifications.length,
+  };
 }
 
 async function main(): Promise<void> {
@@ -248,12 +433,13 @@ async function main(): Promise<void> {
   await validateRecalls();
   await validateWorkflowsAndAssets();
   await validateOperationalLogistics();
+  const workforce = await validateWorkforce();
   await validateScopeExclusions();
 
   if (failures.length > 0) {
     throw new Error(`CareFlow validation failed:\n- ${failures.join("\n- ")}`);
   }
-  console.log(JSON.stringify({ valid: true, counts, scenarios: { icuRedistribution: icu, receivingDiscrepancy: receiving } }, null, 2));
+  console.log(JSON.stringify({ valid: true, counts, scenarios: { icuRedistribution: icu, receivingDiscrepancy: receiving, workforce } }, null, 2));
 }
 
 main()

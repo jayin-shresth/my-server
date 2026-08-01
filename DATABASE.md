@@ -17,7 +17,7 @@ missing.
   later NitroStack resources.
 - `src/data/validation/validate.ts` independently recomputes balances and
   scenario arithmetic.
-- `data/careflow.db` is the ignored local runtime database.
+- `database/careflow.db` is the ignored local runtime database.
 
 The seed phases create core organisation data, the catalogue, suppliers,
 inventory history, materialized balances, and linked scenarios. Phase result
@@ -128,3 +128,96 @@ diagnosis, treatment recommendation, or autonomous clinical decision model or
 function. AI may later orchestrate workflows, but quantities, balances,
 comparisons, eligibility, money, and validation remain deterministic code and
 database operations.
+
+## Workforce scheduling and notifications
+
+Workforce job classification is deliberately separate from authorization.
+`Role` and `UserAssignment` determine permissions and approval authority;
+`StaffProfile.staffType` describes a nurse, pharmacist, technician, manager, or
+other job classification. A clinical job title does not grant an approval role.
+
+The workforce schema consists of:
+
+- `StaffProfile` for employment state and integer-minute scheduling limits;
+- `StaffSkill` for dated skill validity;
+- `Shift` for location, local roster week, start/end time, required job type,
+  required skill, headcount, and publication state;
+- `ShiftAssignment` for draft, confirmed, absent, or cancelled allocation;
+- `StaffUnavailability` for approved leave, sickness, training, and other
+  availability restrictions; and
+- `NotificationDelivery` for idempotent outbound-delivery state without storing
+  the real recipient or provider credentials.
+
+All hours are stored and calculated as integer minutes. Active profiles default
+to 2,400 contracted minutes, 2,880 maximum minutes, 660 minutes minimum rest,
+five consecutive shifts, and three consecutive night shifts.
+
+### Deterministic ICU roster weeks
+
+The published week runs from 6–12 July 2026 and contains 21 ICU shifts: day
+07:00–15:00, evening 15:00–23:00, and night 23:00–07:00. It contains 44 seeded
+assignment slots. The 9 July day shift requires four nurses and retains one
+`ABSENT` assignment, leaving active coverage at 3/4.
+
+The deterministic gap analysis recommends user 05. Their workload changes from
+1,920 to 2,400 minutes. User 06 exceeds the weekly maximum, user 07 has approved
+unavailability, user 08 lacks ICU critical-care skill, and user 09 violates
+minimum rest. These are hard exclusion codes rather than opaque scores.
+
+The planning week runs from 13–19 July 2026 and contains 21 open, unassigned ICU
+shifts. `buildWeeklyRosterPlan` proposes all 42 slots without writing them. With
+eight qualified nurses, two receive six shifts and six receive five.
+
+### Hard scheduling rules and ranking
+
+The application-neutral functions in `src/data/workforce.ts` enforce active
+employment, matching staff type, valid skill through shift end, approved
+unavailability, half-open interval overlap, 2,880 weekly minutes, 660 minutes
+rest, five consecutive shifts, three consecutive nights, and no duplicate shift
+assignment. `DRAFT` and `CONFIRMED` assignments count toward workload;
+`ABSENT` and `CANCELLED` do not.
+
+Every public workforce query requires an organization identifier and applies it
+inside the Prisma query. Unknown and cross-organization identifiers therefore
+share the same not-found behavior. Weekly workload includes active assignments
+at every location in that organization. Rest checks use only the nearest
+assignment on either side of a proposed shift, and consecutive limits apply to
+the local Asia/Kolkata run containing the proposal rather than unrelated
+historical runs.
+
+Eligible candidates are ranked lexicographically by scheduled minutes, home
+location match, recent shift-type continuity, consecutive-shift count, and
+employee code. No random values, floating-point weights, forecasts, or LLM
+scores participate in scheduling.
+
+### Approval and delivery behavior
+
+`WORKFORCE_ROSTER_PUBLISH` and `WORKFORCE_SHIFT_REASSIGN` each require one
+`OPERATIONS_ADMIN` approval. A future Workforce Coordinator may prepare, but
+must not autonomously execute, these actions:
+
+- full-roster preparation creates a workflow, prepared action, and linked
+  `DRAFT` assignments;
+- approved roster execution changes drafts to `CONFIRMED` and shifts to
+  `PUBLISHED`;
+- gap replacement creates a `WORKFORCE_GAP` workflow and `REASSIGN_SHIFT`
+  prepared action; and
+- approved reassignment confirms one replacement while preserving the original
+  `ABSENT` history.
+
+The Workforce Coordinator MCP tools are not implemented yet. The database
+foundation exposes these future resource boundaries:
+
+- `getWeeklyRoster`
+- `getUnfilledShifts`
+- `getShiftCoverage`
+- `getStaffWeeklyWorkload`
+- `evaluateReplacementCandidates`
+- `buildWeeklyRosterPlan`
+- `getWorkforcePreparedAction`
+
+Gmail delivery uses a unique idempotency key and a unique prepared-action/channel
+pair. Only a masked address and a one-way recipient hash are stored. The runtime
+tool must obtain the real recipient and Gmail credentials from environment
+configuration, atomically advance `PENDING` → `SENDING` → `SENT` or `FAILED`,
+increment attempts, and reuse the existing delivery row on retries.
