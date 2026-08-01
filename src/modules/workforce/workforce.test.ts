@@ -19,7 +19,7 @@ import { WorkforceRepository } from './workforce.repository.js';
 import { WorkforceService } from './workforce.service.js';
 import { WorkforceError, parseRosterWeekStart, publicRationaleSchema, weekStartSchema, type WorkforceIdentity } from './workforce.types.js';
 
-const sourceDatabase = resolve('data/careflow.db');
+const sourceDatabase = resolve('database/careflow.db');
 const identity: WorkforceIdentity = {
   subject: 'user-12',
   organizationId: 'org-careflow-001',

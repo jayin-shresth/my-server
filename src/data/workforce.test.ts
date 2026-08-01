@@ -1,10 +1,7 @@
 import { afterEach, beforeEach, describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { copyFileSync, mkdtempSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "../generated/prisma/client.js";
+import { createTestPrismaClient, resetTestDatabase } from "./test-client.js";
 import {
   buildWeeklyRosterPlan,
   evaluateReplacementCandidates,
@@ -19,19 +16,15 @@ const SECOND_ORGANIZATION_ID = "org-careflow-002";
 const TARGET_SHIFT_ID = "shift-icu-20260709-day";
 const WEEK_START = new Date("2026-07-05T18:30:00.000Z");
 
-let directory: string;
 let client: PrismaClient;
 
 beforeEach(() => {
-  directory = mkdtempSync(join(tmpdir(), "careflow-data-workforce-"));
-  const database = join(directory, "careflow-test.db");
-  copyFileSync(resolve("data/careflow.db"), database);
-  client = new PrismaClient({ adapter: new PrismaBetterSqlite3({ url: `file:${database.replaceAll("\\", "/")}` }) });
+  resetTestDatabase();
+  client = createTestPrismaClient();
 });
 
 afterEach(async () => {
   await client.$disconnect();
-  rmSync(directory, { recursive: true, force: true });
 });
 
 async function createSyntheticStaff(id: string, maxMinutesPerWeek = 10_000) {

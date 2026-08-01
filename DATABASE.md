@@ -17,7 +17,7 @@ missing.
   later NitroStack resources.
 - `src/data/validation/validate.ts` independently recomputes balances and
   scenario arithmetic.
-- `data/careflow.db` is the ignored local runtime database.
+- `database/careflow.db` is the ignored local runtime database.
 
 The seed phases create core organisation data, the catalogue, suppliers,
 inventory history, materialized balances, and linked scenarios. Phase result

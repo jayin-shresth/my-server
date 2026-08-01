@@ -8,6 +8,6 @@ export default defineConfig({
     seed: "node --import ./scripts/tsx-userinfo-shim.mjs --import tsx src/data/seed.ts",
   },
   datasource: {
-    url: env("DATABASE_URL"),
+    url: process.env.DIRECT_URL ?? env("DATABASE_URL"),
   },
 });

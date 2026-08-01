@@ -45,7 +45,7 @@ let service: OrchestratorService;
 before(async () => {
   temporaryDirectory = await mkdtemp(join(tmpdir(), 'careflow-orchestrator-'));
   const databasePath = join(temporaryDirectory, 'careflow-test.db');
-  await copyFile(resolve('data/careflow.db'), databasePath);
+  await copyFile(resolve('database/careflow.db'), databasePath);
   const adapter = new PrismaBetterSqlite3({ url: `file:${databasePath.replace(/\\/g, '/')}` });
   client = new PrismaClient({ adapter });
   assert.ok(await client.organization.findUnique({ where: { id: identity.organizationId } }), 'seed organization must exist');
