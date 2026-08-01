@@ -44,8 +44,9 @@ export class SQLiteProcurementRepository implements ProcurementRepository {
         supplierName: best.supplier.name,
         unitPricePaise: best.unitPricePaise,
         performanceScoreBasisPoints: best.supplier.performanceScoreBasisPoints,
-    };
-        }
+        gstBasisPoints: best.gstBasisPoints,
+        };
+    }
   
 
   async findApprovalPolicy(

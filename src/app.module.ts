@@ -3,6 +3,7 @@ import { CalculatorModule } from './modules/calculator/calculator.module.js';
 import { PharmacyModule } from './modules/pharmacy/pharmacy.module.js';
 import { SystemHealthCheck } from './health/system.health.js';
 import { ProcurementModule } from './modules/procurement/procurement.module.js';
+import { ApprovalModule } from "./modules/approval/approval.module.js";
 
 /**
  * Root Application Module
@@ -27,7 +28,8 @@ import { ProcurementModule } from './modules/procurement/procurement.module.js';
     ConfigModule.forRoot(),
     CalculatorModule,
     PharmacyModule,
-    ProcurementModule
+    ProcurementModule,
+    ApprovalModule
   ],
   providers: [
     SystemHealthCheck,

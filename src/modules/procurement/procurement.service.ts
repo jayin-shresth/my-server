@@ -113,13 +113,19 @@ export class ProcurementService {
     estimatedCostPaise: number
   ): string {
     return JSON.stringify({
-      itemId: recommendation.itemId,
-      itemName: recommendation.itemName,
-      supplierId: supplier.supplierId,
-      supplierName: supplier.supplierName,
-      quantity: recommendation.suggestedOrderQuantity,
-      unitPricePaise: supplier.unitPricePaise,
-      estimatedCostPaise,
+        itemId: recommendation.itemId,
+        itemName: recommendation.itemName,
+
+        supplierId: supplier.supplierId,
+        supplierName: supplier.supplierName,
+
+        quantity: recommendation.suggestedOrderQuantity,
+
+        unitPricePaise: supplier.unitPricePaise,
+        gstBasisPoints: supplier.gstBasisPoints,
+
+        estimatedCostPaise,
+
     });
   }
 

@@ -13,6 +13,8 @@ export interface SupplierSelection {
   supplierName: string;
 
   unitPricePaise: number;
+  gstBasisPoints: number;
+  
   performanceScoreBasisPoints: number;
 }
 
